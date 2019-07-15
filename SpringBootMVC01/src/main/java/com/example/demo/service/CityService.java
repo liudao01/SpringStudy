@@ -5,41 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dao.CityDao;
+import com.example.demo.dao.CityRepository;
 import com.example.demo.domain.City;
 
 @Service
 public class CityService {
 
 	@Autowired
-	CityDao cityDao;
+	CityRepository cityRepo;
 
 	public List<City> findAll() {
-		return cityDao.findAll();
+		//JpaRepository 自带findAll
+		List<City> findAll = cityRepo.findAll();
+		return findAll;
 	}
 
-	public String add(Integer id, String name) {
-		City city = new City();
-		city.setId(id);
-		city.setName(name);
-		try {
-			cityDao.save(city);
-
-			return "保存成功";
-		} catch (Exception e) {
-			// TODO: handle exception
-			return "保存失败";
-		}
-	}
-
-	public String add(City city) {
-
-		try {
-			cityDao.save(city);
-			return "保存成功";
-		} catch (Exception e) {
-			// TODO: handle exception
-			return "保存失败";
-		}
-	}
 }

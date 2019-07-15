@@ -28,41 +28,19 @@ import com.example.demo.service.CityService;
  * @Controller 作用于表现层（spring-mvc的注解）
  * @author liumaolin
  *
+ * 访问地址: http://localhost/boot/city/list
  */
 @Controller
+@RequestMapping("/city")
 public class MainController {
 
 	@Autowired
 	CityService cityService;
-	
-	
+
 	@RequestMapping("/list")
 	public String list(Model map) {
 		List<City> list = cityService.findAll();
 		map.addAttribute("list", list);
 		return "list";
 	}
-	
-	@RequestMapping("/add")
-	public String add(@ModelAttribute City city,Model map) {
-		
-		String success = cityService.add(city);
-		map.addAttribute("success",city);
-		return "add";
-	}
-	
-
-	
-	@RequestMapping("/addPage")
-	public String addPage() {
-		return "add";
-	}
 }
-
-
-
-
-
-
-
-

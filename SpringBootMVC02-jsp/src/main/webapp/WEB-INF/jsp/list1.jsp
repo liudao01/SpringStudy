@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 </head>
 <body>
+jsp
 ID : ${city.id }
 name : ${city.name }
 </body>

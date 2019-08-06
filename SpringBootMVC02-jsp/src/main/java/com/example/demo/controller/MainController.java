@@ -38,6 +38,7 @@ public class MainController {
 	@Autowired
 	CityService cityService;
 
+	//http://localhost:8080/city/list
 	@RequestMapping("/list")
 	public String list(Model map) {
 		
@@ -60,8 +61,10 @@ public class MainController {
 
 		City city = cityService.findOne(id);
 		model.addAttribute("city", city);
+		System.out.println("city "+city.getName());
 		//这里用到的view 是jsp 的
 		return "list1";
+		
 	}
 	
 	

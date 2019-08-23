@@ -31,18 +31,19 @@ import com.example.demo.service.CityService;
  * @Controller 作用于表现层（spring-mvc的注解）
  * @author liumaolin
  *
- * 访问地址: http://localhost:8080/list
+ * 访问地址: http://localhost:8080/account/
+ * 
+ * 访问地址设置
+ * server.servlet.context-path=/account
  */
 @Controller
 public class MainController {
-
+	
 	@Autowired
 	CityService cityService;
-	//http://localhost:8080/city/list
+	//http://localhost:8080/
 	@RequestMapping("/list")
 	public String list(Model map) {
-		List<City> list = cityService.findAll();
-		map.addAttribute("list", list);
 		//返回的这个list 是templates 里面的list模板
 		return "list";
 	}

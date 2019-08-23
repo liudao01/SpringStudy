@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.domain.City;
@@ -29,19 +31,16 @@ import com.example.demo.service.CityService;
  * @Controller 作用于表现层（spring-mvc的注解）
  * @author liumaolin
  *
- * 访问地址: http://localhost:8080/city/list
+ * 访问地址: http://localhost:8080/list
  */
 @Controller
-@RequestMapping("/city")
 public class MainController {
 
 	@Autowired
 	CityService cityService;
-
 	//http://localhost:8080/city/list
 	@RequestMapping("/list")
 	public String list(Model map) {
-		
 		List<City> list = cityService.findAll();
 		map.addAttribute("list", list);
 		//返回的这个list 是templates 里面的list模板
@@ -49,24 +48,30 @@ public class MainController {
 	}
 	
 	/**
-	 * @RequestParam 和 @PathVariable 注解是用于从request中接收请求的，两个都可以接收参数，
-	 * 关键点不同的是@RequestParam 是从request里面拿取值，
-	 * 而 @PathVariable 是从一个URI模板里面来填充
+	 * @GetMapping 区分get post  同样的Url get 走这里
 	 * @return
-	 * 
-	 * http://localhost:8080/city/list/1
 	 */
-	@RequestMapping("/list/{id}")
-	public String getOne(@PathVariable("id") Integer id, Model model) {
+	@GetMapping("/register")
+	public String register() {
 
-		City city = cityService.findOne(id);
-		model.addAttribute("city", city);
-		System.out.println("city "+city.getName());
-		//这里用到的view 是jsp 的
-		return "list1";
-		
+		return "register";
 	}
 	
+	/**
+	 * post 方法进入这里
+	 * @return
+	 */
+	@PostMapping("/register")
+	public String registerP() {
+
+		return "register";
+	}
+	
+	@RequestMapping("/login")
+	public String login() {
+
+		return "login";
+	}
 	
 	
 	

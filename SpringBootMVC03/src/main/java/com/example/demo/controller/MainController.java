@@ -50,8 +50,12 @@ public class MainController {
 	@RequestMapping("/list")
 	@ResponseBody
 	public Object list(Model map) {
-		List<Account> findAll = accountService.findAll();
-		return findAll;
+		//查找所有
+//		List<Account> findAll = accountService.findAll();
+		//自定义hql 查找id为1的数据
+		Object account = accountService.findxxx();
+		System.out.println("account "+account);
+		return account;
 		
 	}
 
@@ -65,7 +69,15 @@ public class MainController {
 		System.out.println("get register");
 		return "register";
 	}
-
+	
+	@RequestMapping("/findbyidbetten")
+	@ResponseBody
+	public Object findbyidbetten(Model map) {
+		List<Account> findAll = accountService.findByIdBetween(1, 6);
+		return findAll;
+		
+	}
+	
 	/**
 	 * post 方法进入这里
 	 * 

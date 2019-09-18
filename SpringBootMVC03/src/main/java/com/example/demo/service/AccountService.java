@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,24 @@ public class AccountService {
 	 * @param id
 	 * @return
 	 */
-	public Account findOne(Integer id) {
-		return accountRepo.getOne(id);
+	public Optional<Account> findById(Integer id) {
+		//接口自带方法
+	
+		
+		return 	accountRepo.findById(id);
+	}
+	
+	
+	/**
+	 * 找到id 在min 和max 之间的数据集合
+	 * @param min
+	 * @param max
+	 * @return
+	 */
+	public List<Account> findByIdBetween(int min,int max) {
+		//JpaRepository 自带findAllctionToString(findAll));
+		//自定义方法
+		return accountRepo.findByIdBetween(min,max);
 	}
 
 
@@ -58,6 +75,12 @@ public class AccountService {
 		return RespStat.build(200);
 	}
 
+	
+	public Object findxxx() {
+//		List<Account> byxxxAccounts = accountRepo.findbyxx();
+		List<Account> byxxxAccounts = accountRepo.findbyxx2(2);
+		return  byxxxAccounts;
+	}
 
 	
 	

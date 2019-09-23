@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  这个是mybatis的约束-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <!-- namespace 对应到 接口上 就不需要实例化了 -->
+ <mapper namespace="com.example.demo.mapper.AccountMapper">
+ 
+ <!-- pojo对象和表之间的 字段和属性的映射关系    com.example.demo.mapper -->
+ 	<resultMap type="com.example.demo.mapper.Account" id="BaseResultMap">
+ 	
+ 		<!-- column 表里的字段 -->
+		<!-- property 实体对象里的属性 -->
+		<result column="login_name" property="loginName"/>
+		<result column="password" property="password"/>
+ 	
+ 	</resultMap>
+ 
+ <!-- <select id=""> 一个select 的实现  BaseResultMap 和上面resultMap里面的id 对应-->
+ <select id="findAll" resultMap="BaseResultMap">
+ 		select * from account
+ 		
+ </select>
+ 
+ </mapper>

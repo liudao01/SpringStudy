@@ -3,6 +3,7 @@ package com.example.demo.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 
 /**
@@ -14,9 +15,11 @@ import org.apache.ibatis.annotations.Mapper;
  * 
  *  mapper  是映射.
  */
-@Mapper
+//@Mapper
+//把这里mapper注解注释掉 那么 需要在applaction里面扫码这个类
 public interface AccountMapper {
 
+	@Select("select * from account")
 	List<Account> findAll();
 	
 	

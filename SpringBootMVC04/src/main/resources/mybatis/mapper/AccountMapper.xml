@@ -18,9 +18,9 @@
  	</resultMap>
  
  <!-- <select id=""> 一个select 的实现  BaseResultMap 和上面resultMap里面的id 对应-->
- <select id="findAll" resultMap="BaseResultMap">
+ <!-- <select id="findAll" resultMap="BaseResultMap">
  		select * from account
  		
  </select>
- 
+ --> 
  </mapper>

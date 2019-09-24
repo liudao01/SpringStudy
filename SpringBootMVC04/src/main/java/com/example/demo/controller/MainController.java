@@ -53,6 +53,12 @@ public class MainController {
 	
 	
 	
+	@RequestMapping("/add")
+	@ResponseBody
+	public Object add() {
+		accountService.add();
+		return "ok";
+	}
 	
 	
 	

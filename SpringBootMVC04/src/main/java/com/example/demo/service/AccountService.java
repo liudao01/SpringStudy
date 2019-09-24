@@ -13,10 +13,19 @@ public class AccountService {
 
 	@Autowired
 	AccountMapper accountMapper;
-	
+
 	public List<Account> findAll() {
 		return accountMapper.findAll();
 
+	}
+
+	public void add() {
+		Account account = new Account();
+		account.setAge(19);
+		account.setLoacation("beijing");
+		account.setLoginName("xiaoming");
+		account.setPassword("123");
+		accountMapper.add(account);
 	}
 
 }

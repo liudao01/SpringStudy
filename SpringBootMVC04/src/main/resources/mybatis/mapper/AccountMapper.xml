@@ -23,4 +23,21 @@
  		
  </select>
  --> 
+ 
+ 
+ <insert id = "add" parameterType = "Account">
+ 
+ insert into account(login_name,password)
+ values 
+ (
+ 	#{loginName},#{password}
+ )
+ 
+ 
+ </insert>
  </mapper>
+ 
+ 
+ 
+ 
+ 

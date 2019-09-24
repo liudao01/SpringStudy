@@ -23,5 +23,6 @@ public interface AccountMapper {
 	List<Account> findAll();
 	
 	
+	void add(Account account);
 
 }

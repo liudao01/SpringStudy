@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.mapper.Account;
+import com.example.demo.mapper.Menu;
 import com.example.demo.service.AccountService;
+import com.example.demo.service.MenuService;
 
 
 /**
@@ -40,13 +42,19 @@ public class MainController {
 
 	@Autowired
 	AccountService accountService;
+	
+	@Autowired
+	MenuService menuService;
 
 	
 	@RequestMapping("/list")
 	@ResponseBody
 	public Object list() {
 		List<Account> accountObject =  accountService.findAll();
-		return accountObject;
+		
+		List<Menu> menus  = menuService.findAll();
+		
+		return menus;
 	}
 	
 	
@@ -57,6 +65,13 @@ public class MainController {
 	@ResponseBody
 	public Object add() {
 		accountService.add();
+		return "ok";
+	}
+	
+	@RequestMapping("/addMenu")
+	@ResponseBody
+	public Object addMenu() {
+		menuService.add();
 		return "ok";
 	}
 	

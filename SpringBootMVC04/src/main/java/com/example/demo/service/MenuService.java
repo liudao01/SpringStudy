@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.mapper.Menu;
 import com.example.demo.mapper.MenuExample;
 import com.example.demo.mapper.MenuMapper;
+import com.github.pagehelper.PageHelper;
 @Service
 public class MenuService {
 	
@@ -48,14 +49,35 @@ public class MenuService {
 		menuMapper.insert(menu);
 	}
 	
-	public void findById(int id) {
+	public Menu findById(int id) {
 		// TODO Auto-generated method stub
-		Menu menu = new Menu();
-		menu.setName("首页");
-		menu.setRoles("all");
-		menu.setIndex("0");
-		menuMapper.insert(menu);
 		
+		MenuExample example = new MenuExample();
+		
+		example.createCriteria().andIdEqualTo(id);
+//		List<Menu> list  = menuMapper.selectByExample(example);
+		
+//		return list.size()==1?list.get(0):null;
+		
+		//使用第二种方式
+		Menu menu = menuMapper.selectByPrimaryKey(id);
+		return menu;
+	}
+
+	
+	/**
+	 * 分页查询
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	public List<Menu> findByPage(Integer pageNumber, Integer pageSize) {
+		
+		PageHelper.startPage(pageNumber,pageSize);
+		//example 实际上就是一堆的复杂条件查询  生成里面已经有MenuExample 
+		MenuExample menuExample = new MenuExample();
+		//AOP 面向切面编程 分页.  增强了sql 语句
+		return menuMapper.selectByExample(menuExample);
 	}
 	
 

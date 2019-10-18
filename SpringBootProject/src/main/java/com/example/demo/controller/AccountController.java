@@ -1,10 +1,18 @@
 package com.example.demo.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.example.demo.entity.Account;
+import com.example.demo.service.AccountService;
 
 /**
  * 用户账号相关操作
+ * 
  * @author liumaolin
  *
  */
@@ -12,9 +20,60 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/account")
 public class AccountController {
 
+	@Autowired
+	AccountService accountService;
+	
+	/**
+	 * 登录
+	 * 
+	 * @return
+	 */
 	@RequestMapping("login")
 	public String login() {
 		return "account/login";
 	}
-	
+
+	/**
+	 * 校验账户 数据校验
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/validataAccount")
+	@ResponseBody
+	public String validataAccount(String loginName, String password,HttpServletRequest request) {
+		System.out.print("loginname=" + loginName);
+		
+		System.out.print("password=" + password);
+		//1 直接返回是否登录成功的结果
+		//2. 返回Account 对象 若对象是空的 在controller 里做业务逻辑处理
+		
+		Account account =accountService.findByLoginAndPassword(loginName,password);
+		
+		
+		if(account==null) {
+			return "登录失败";
+		}else {
+			//登录成功
+			//让service 返回对象 如果登录成功把用户对象 写到session里
+			//在不同controller 或者前端页面上都能使用当前Account对象
+			request.getSession().setAttribute("account", account);;
+			return "success";
+		}
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

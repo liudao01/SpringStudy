@@ -61,6 +61,20 @@ public class AccountController {
 		}
 		
 	}
+	
+	@RequestMapping("/logOut")
+	public String logOut(HttpServletRequest request) {
+		
+		request.getSession().removeAttribute("account");
+		return "index";
+	}
+
+	@RequestMapping("/list")
+	@ResponseBody
+	public String list(HttpServletRequest request) {
+		
+		return "list";
+	}
 }
 
 

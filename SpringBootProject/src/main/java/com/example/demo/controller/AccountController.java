@@ -70,9 +70,8 @@ public class AccountController {
 	}
 
 	@RequestMapping("/list")
-	@ResponseBody
 	public String list(HttpServletRequest request) {
-		
+
 		return "list";
 	}
 }

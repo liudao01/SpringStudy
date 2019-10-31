@@ -1,10 +1,14 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.entity.Account;
@@ -22,7 +26,7 @@ public class AccountController {
 
 	@Autowired
 	AccountService accountService;
-	
+
 	/**
 	 * 登录
 	 * 
@@ -40,44 +44,49 @@ public class AccountController {
 	 */
 	@RequestMapping("/validataAccount")
 	@ResponseBody
-	public String validataAccount(String loginName, String password,HttpServletRequest request) {
+	public String validataAccount(String loginName, String password, HttpServletRequest request) {
 		System.out.print("loginname=" + loginName);
-		
+
 		System.out.print("password=" + password);
-		//1 直接返回是否登录成功的结果
-		//2. 返回Account 对象 若对象是空的 在controller 里做业务逻辑处理
-		
-		Account account =accountService.findByLoginAndPassword(loginName,password);
-		
-		
-		if(account==null) {
+		// 1 直接返回是否登录成功的结果
+		// 2. 返回Account 对象 若对象是空的 在controller 里做业务逻辑处理
+
+		Account account = accountService.findByLoginAndPassword(loginName, password);
+
+		if (account == null) {
 			return "登录失败";
-		}else {
-			//登录成功
-			//让service 返回对象 如果登录成功把用户对象 写到session里
-			//在不同controller 或者前端页面上都能使用当前Account对象
-			request.getSession().setAttribute("account", account);;
+		} else {
+			// 登录成功
+			// 让service 返回对象 如果登录成功把用户对象 写到session里
+			// 在不同controller 或者前端页面上都能使用当前Account对象
+			request.getSession().setAttribute("account", account);
+			;
 			return "success";
 		}
-		
+
 	}
-	
+
 	@RequestMapping("/logOut")
 	public String logOut(HttpServletRequest request) {
-		
+
 		request.getSession().removeAttribute("account");
 		return "index";
 	}
 
+	/**
+	 * 用户列表
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/list")
-	public String list(HttpServletRequest request) {
-
-		return "list";
+	public String list(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, Model model) {
+		
+		List<Account> page = accountService.findByPage(pageNum,pageSize);
+		model.addAttribute("accountList",page);
+		return "/account/list";
 	}
 }
-
-
-
 
 
 

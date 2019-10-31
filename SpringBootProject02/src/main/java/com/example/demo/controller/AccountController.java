@@ -82,6 +82,7 @@ public class AccountController {
 	public String list(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, Model model) {
 		
 		PageInfo<Account> page = accountService.findByPage(pageNum,pageSize);
+		
 		model.addAttribute("page",page);
 		return "/account/list";
 	}

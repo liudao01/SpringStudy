@@ -34,8 +34,8 @@ public class AccountService {
 		PageHelper.startPage(pageNum, pageSize);
 		AccountExample example = new AccountExample();
 		List<Account> list = accMapper.selectByExample(example);
-		
-		return new PageInfo<>(list);
+		PageInfo page= new PageInfo<>(list,5);//5显示导航有多少页码
+		return page; 
 	}
 
 }

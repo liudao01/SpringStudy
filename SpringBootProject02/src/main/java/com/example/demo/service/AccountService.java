@@ -9,6 +9,7 @@ import com.example.demo.entity.Account;
 import com.example.demo.mapper.AccountExample;
 import com.example.demo.mapper.AccountMapper;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service
 public class AccountService {
@@ -28,12 +29,13 @@ public class AccountService {
 		return list.size() == 0 ? null : list.get(0);
 	}
 
-	public List<Account> findByPage(int pageNum, int pageSize) {
+	public PageInfo<Account> findByPage(int pageNum, int pageSize) {
 		
 		PageHelper.startPage(pageNum, pageSize);
 		AccountExample example = new AccountExample();
-		List<Account> list = null;
-		return accMapper.selectByExample(example);
+		List<Account> list = accMapper.selectByExample(example);
+		
+		return new PageInfo<>(list);
 	}
 
 }

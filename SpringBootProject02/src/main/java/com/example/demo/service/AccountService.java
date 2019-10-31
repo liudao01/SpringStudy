@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.controller.RespStat;
 import com.example.demo.entity.Account;
 import com.example.demo.mapper.AccountExample;
 import com.example.demo.mapper.AccountMapper;
@@ -34,8 +35,19 @@ public class AccountService {
 		PageHelper.startPage(pageNum, pageSize);
 		AccountExample example = new AccountExample();
 		List<Account> list = accMapper.selectByExample(example);
-		PageInfo page= new PageInfo<>(list,5);//5显示导航有多少页码
+		PageInfo page= new PageInfo<>(list,5);//5显示导航最大有多少页码
 		return page; 
+	}
+
+	public RespStat deleteById(int id) {
+		int deleteByPrimaryKey = accMapper.deleteByPrimaryKey(id);//影响结果的行数
+		System.out.println("影响结果行数 = "+deleteByPrimaryKey);
+		
+		if(deleteByPrimaryKey==1) {
+			return RespStat.build(200);
+		}else {
+			return RespStat.build(500,"删除出错");
+		}
 	}
 
 }

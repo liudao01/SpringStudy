@@ -57,5 +57,11 @@ public class RespStat {
 		// TODO Auto-generated method stub
 		return new RespStat(i,"ok","无数据");
 	}
+
+
+	public static RespStat build(int code, String string) {
+		// TODO Auto-generated method stub
+		return new RespStat(code,string,"");
+	}
 	
 }

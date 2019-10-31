@@ -127,7 +127,14 @@
  	<td th:text="${account.age}">age</td>
  	<td th:text="${account.location}">location</td>
  	<td th:text="${account.role}">role</td>
- 	<td>操作</td>
+ 	<td >
+ 		<a class="btn btn-danger" th:href="@{'javascript:deleteById('+${account.id}+');'}" >
+		删除
+		</a>
+		
+		修改密码
+ 	
+ 	</td>
  	
  
  </tr>
@@ -154,7 +161,43 @@
 
 <!--  列表       结束   ↑ -->
 
+<!-- JavaScript -->
+<script type="text/javascript">
+
+function deleteById(id){
+	console.log(id);
+	//删除操作 1 以链接方式访问controlleer 里面的方法  可能造成页面跳转
+	// 异步通过ajax 去访问 带有json访问结果的controller
+	var url = "/account/deleteById";
+	var args = {id:id};
+	//返回data 是RespStat 类型
+	$.post(url,args,function(data){
+		console.log(data);
+		if(data.code==200){
+			//删除成功 刷新页面
+			window.location.reload();
+		}else{
+			alert(data.msg);
+		}
+	});
+}
+
+
+</script>
 
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

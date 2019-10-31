@@ -86,6 +86,21 @@ public class AccountController {
 		model.addAttribute("page",page);
 		return "/account/list";
 	}
+	
+
+	/**
+	 * 用户列表
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/deleteById")
+	@ResponseBody
+	public RespStat deleteById( int id) {
+		//标记是否删除成功   status  
+		RespStat respStat = accountService.deleteById(id);
+		return respStat;
+	}
 }
 
 

@@ -36,13 +36,32 @@ public class AccountController {
 		return "account/login";
 	}
 	/**
-	 * 登录
+	 * 注册
 	 * 
 	 * @return
 	 */
 	@RequestMapping("register")
 	public String register() {
 		return "account/register";
+	}
+	
+	/**
+	 * 注册用户
+	 * @param id
+	 * @param loginName
+	 * @param password
+	 * @param nickName
+	 * @param age
+	 * @param location
+	 * @return
+	 */
+	@RequestMapping("/registerUser")
+	@ResponseBody
+	public RespStat registerUser( int id,String loginName,String password,String nickName,Integer age,String location) {
+		System.out.println("注册用户 id "+id);
+		//标记是否删除成功   status  
+		RespStat respStat = accountService.reguster(id,loginName,password,nickName,age,location);
+		return respStat;
 	}
 	/**
 	 * 校验账户 数据校验
@@ -67,12 +86,16 @@ public class AccountController {
 			// 让service 返回对象 如果登录成功把用户对象 写到session里
 			// 在不同controller 或者前端页面上都能使用当前Account对象
 			request.getSession().setAttribute("account", account);
-			;
 			return "success";
 		}
 
 	}
 
+	/**
+	 * 登出
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/logOut")
 	public String logOut(HttpServletRequest request) {
 
@@ -97,7 +120,8 @@ public class AccountController {
 	
 
 	/**
-	 * 用户列表
+	 * 根据id 删除用户
+	 * TODO  需要校验是否当前登录用户 如果是当前登录用户 不能删除
 	 * 
 	 * @param request
 	 * @return
@@ -109,6 +133,22 @@ public class AccountController {
 		RespStat respStat = accountService.deleteById(id);
 		return respStat;
 	}
+	
+	 private Integer id;
+
+	    private String loginName;
+
+	    private String password;
+
+	    private String nickName;
+
+	    private Integer age;
+
+	    private String location;
+
+
+	
+	
 }
 
 

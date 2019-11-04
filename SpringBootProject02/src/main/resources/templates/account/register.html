@@ -4,6 +4,13 @@
 <html>
 <head>
 <title>注册页面</title>
+
+<!-- 最新的 Bootstrap 核心 css 文件 -->
+<!-- 在url上 使用 @标签 可以帮我们 自动加上 contextpath -->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script th:src="@{/js/common/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
 <style>
 .pg_header {
 	position: fixed;
@@ -196,10 +203,31 @@ input[type="submit"] {
 	</form>
 	<script type="text/javascript">
             //刷新or取消
-            document.getElementById('i77').onclick = function(){
+            document.getElementById('i111').onclick = function(){
                 /* location.reload(); */
                 //注册点击
-                
+                //int id,String loginName,String password,String nickName,Integer age,String location
+            	var loginName = document.getElementById("text1").value;//用户名
+            	var password = document.getElementById("text2").value;//密码
+            	var password = document.getElementById("text3").value;//确认密码
+            	var age = document.getElementById("text4").value;//年龄
+            	var nickName  = document.getElementById("text5").value;//昵称
+            	var location = document.getElementById("text6").value;//位置
+            	
+            	var url = "/account/registerUser";
+				var args = {loginName:loginName,password:password,age:age,nickName:nickName,location:location};
+				$.post(url,args,function(data){
+					
+					if(data == "success"){
+						// 登录成功 跳转页面
+						//window.location.href="/index";
+						console.log(data+"加载成功")
+					}else {
+						confirm("注册出错"+data);
+					}
+					
+					console.log(data)
+				}); 
                 
             }
             document.getElementById('i222').onclick = function(){
@@ -210,9 +238,9 @@ input[type="submit"] {
             	document.getElementById("text1").value="test"+test;
             	document.getElementById("text2").value="test"+test;
             	document.getElementById("text3").value="test"+test;
-            	document.getElementById("text4").value=test;
-            	document.getElementById("text5").value="test"+test;
-            	document.getElementById("text6").value="test"+test;
+            	document.getElementById("text4").value=test;//年龄
+            	document.getElementById("text5").value="test"+test;//昵称
+            	document.getElementById("text6").value="test"+test;//位置
             	console.log("随机数"+test);
             }
 

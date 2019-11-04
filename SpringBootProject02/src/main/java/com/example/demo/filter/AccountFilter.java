@@ -22,10 +22,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @WebFilter(urlPatterns = "/*")
-public class AccountFilter implements Filter {
+public class AccountFilter implements Filter {//registerUser
 
 	// 不需要登录的url
-	private final String[] IGNORE_URL = { "/index", "/css/", "/js/", "/account/login","/account/register","/account/validataAccount" ,"/images"};
+	private final String[] IGNORE_URL = { "/index", "/css/", "/js/", "/account/login","/account/registerUser","/account/register","/account/validataAccount" ,"/images"};
 
 	// 登录页 首页 不需要过权限管理系统
 	@Override
@@ -35,10 +35,10 @@ public class AccountFilter implements Filter {
 		HttpServletResponse respons = (HttpServletResponse) resp;
 
 		String uri = request.getRequestURI();
-		System.out.println("------dofilter------------" + uri);
+//		System.out.println("------dofilter------------" + uri);
 		//判断当前访问的uri是不是在ignore里面  当前访问的uri 是否在ignore
 		boolean pass = canPassIgnore(uri);
-		System.out.println("pass = "+pass);
+//		System.out.println("pass = "+pass);
 		if (pass) {
 			//在里面的话放行
 			chain.doFilter(request, respons);
@@ -46,7 +46,7 @@ public class AccountFilter implements Filter {
 		} 
 			//是否已登录 从session 里面找account
 		Object account = request.getSession().getAttribute("account");
-		System.out.println("session  account = "+account);
+//		System.out.println("session  account = "+account);
 		if(account == null) {
 			//没登录 跳转登录页面
 			respons.sendRedirect("/account/login");

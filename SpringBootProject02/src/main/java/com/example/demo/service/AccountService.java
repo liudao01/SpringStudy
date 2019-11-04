@@ -41,7 +41,7 @@ public class AccountService {
 
 	public RespStat deleteById(int id) {
 		int deleteByPrimaryKey = accMapper.deleteByPrimaryKey(id);//影响结果的行数
-		System.out.println("影响结果行数 = "+deleteByPrimaryKey);
+		System.out.println("deleteById 影响结果行数 = "+deleteByPrimaryKey);
 		
 		if(deleteByPrimaryKey==1) {
 			return RespStat.build(200);
@@ -49,6 +49,28 @@ public class AccountService {
 			return RespStat.build(500,"删除出错");
 		}
 	}
+
+	public RespStat reguster(int id, String loginName, String password, String nickName, Integer age, String location) {
+		
+		Account account = new Account();
+//		account.setId(id);
+		account.setLocation(loginName);
+		account.setNickName(nickName);
+		account.setAge(age);
+		account.setLocation(location);
+		int deleteByPrimaryKey = accMapper.insert(account);//影响结果的行数
+		System.out.println("reguster 影响结果行数 = "+deleteByPrimaryKey);
+		
+		if(deleteByPrimaryKey==1) {
+			return RespStat.build(200);
+		}else {
+			return RespStat.build(500,"添加出错");
+		}
+	}
+	
+
+	
+	
 
 }
 

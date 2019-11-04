@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 public class AccountFilter implements Filter {
 
 	// 不需要登录的url
-	private final String[] IGNORE_URL = { "/index", "/css/", "/js/", "/account/login","/account/validataAccount" ,"/images"};
+	private final String[] IGNORE_URL = { "/index", "/css/", "/js/", "/account/login","/account/register","/account/validataAccount" ,"/images"};
 
 	// 登录页 首页 不需要过权限管理系统
 	@Override

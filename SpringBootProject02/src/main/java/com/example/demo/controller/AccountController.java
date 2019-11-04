@@ -35,7 +35,15 @@ public class AccountController {
 	public String login() {
 		return "account/login";
 	}
-
+	/**
+	 * 登录
+	 * 
+	 * @return
+	 */
+	@RequestMapping("register")
+	public String register() {
+		return "account/register";
+	}
 	/**
 	 * 校验账户 数据校验
 	 * 
@@ -84,7 +92,7 @@ public class AccountController {
 		PageInfo<Account> page = accountService.findByPage(pageNum,pageSize);
 		
 		model.addAttribute("page",page);
-		return "/account/list";
+		return "account/list";
 	}
 	
 

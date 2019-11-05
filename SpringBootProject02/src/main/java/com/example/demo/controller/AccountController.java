@@ -160,7 +160,7 @@ public class AccountController {
 	}
 
 	/**
-	 * 文件上传  这是在jar包解开的情况下才可以 如果打成jar包 不能在包里面写文件.
+	 * 文件上传 这是在jar包解开的情况下才可以 如果打成jar包 不能在包里面写文件.
 	 * 
 	 * 应该做一次资源映射
 	 * 
@@ -169,18 +169,25 @@ public class AccountController {
 	 * @return
 	 */
 	@RequestMapping("/fileUploadController")
+	@ResponseBody
 	public String fileUpload(MultipartFile filename, String password) {
 		System.out.println("password:" + password);
 		System.out.println("file:" + filename.getOriginalFilename());
 		try {
 
-			File path = new File(ResourceUtils.getURL("classpath:").getPath());
+			//原始的位置  映射的   ResourceUtils.getURL("classpath:").getPath()
+			System.out.println("ResourceUtils.getURL(\"classpath:\").getPath() = "
+					+ ResourceUtils.getURL("classpath:").getPath());
+			///Users/liumaolin/Downloads/project_study
+			//暂时写死 本地的路径  需要加上 static/upload/ 
+			File path = new File("/Users/liumaolin/Downloads/project_study");
 			File upload = new File(path.getAbsolutePath(), "static/upload/");
 
 			System.out.println("upload:" + upload);
+			System.out.println("filename.getOriginalFilename() = "+filename.getOriginalFilename());
 
 			filename.transferTo(new File(upload + "/" + filename.getOriginalFilename()));
-
+			System.out.println("ok");
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

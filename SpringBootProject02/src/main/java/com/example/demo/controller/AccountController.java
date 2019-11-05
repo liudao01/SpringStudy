@@ -35,6 +35,7 @@ public class AccountController {
 	public String login() {
 		return "account/login";
 	}
+
 	/**
 	 * 注册
 	 * 
@@ -44,9 +45,10 @@ public class AccountController {
 	public String register() {
 		return "account/register";
 	}
-	
+
 	/**
 	 * 注册用户
+	 * 
 	 * @param id
 	 * @param loginName
 	 * @param password
@@ -57,12 +59,14 @@ public class AccountController {
 	 */
 	@RequestMapping("/registerUser")
 	@ResponseBody
-	public RespStat registerUser( int id,String loginName,String password,String nickName,Integer age,String location) {
-		System.out.println("注册用户 id "+id);
-		//标记是否删除成功   status  
-		RespStat respStat = accountService.reguster(id,loginName,password,nickName,age,location);
+	public RespStat registerUser(String loginName, String password, String nickName, Integer age,String location) {
+		
+		System.out.println("注册用户 loginName " + loginName);
+		// 标记是否删除成功 status
+		RespStat respStat = accountService.reguster( loginName, password, nickName, age, location);
 		return respStat;
 	}
+
 	/**
 	 * 校验账户 数据校验
 	 * 
@@ -93,6 +97,7 @@ public class AccountController {
 
 	/**
 	 * 登出
+	 * 
 	 * @param request
 	 * @return
 	 */
@@ -110,55 +115,39 @@ public class AccountController {
 	 * @return
 	 */
 	@RequestMapping("/list")
-	public String list(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize, Model model) {
-		
-		PageInfo<Account> page = accountService.findByPage(pageNum,pageSize);
-		
-		model.addAttribute("page",page);
+	public String list(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int pageSize,
+			Model model) {
+
+		PageInfo<Account> page = accountService.findByPage(pageNum, pageSize);
+
+		model.addAttribute("page", page);
 		return "account/list";
 	}
-	
 
 	/**
-	 * 根据id 删除用户
-	 * TODO  需要校验是否当前登录用户 如果是当前登录用户 不能删除
+	 * 根据id 删除用户 TODO 需要校验是否当前登录用户 如果是当前登录用户 不能删除
 	 * 
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/deleteById")
 	@ResponseBody
-	public RespStat deleteById( int id) {
-		//标记是否删除成功   status  
+	public RespStat deleteById(int id) {
+		// 标记是否删除成功 status
 		RespStat respStat = accountService.deleteById(id);
 		return respStat;
 	}
-	
-	 private Integer id;
 
-	    private String loginName;
+	private Integer id;
 
-	    private String password;
+	private String loginName;
 
-	    private String nickName;
+	private String password;
 
-	    private Integer age;
+	private String nickName;
 
-	    private String location;
+	private Integer age;
 
+	private String location;
 
-	
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-

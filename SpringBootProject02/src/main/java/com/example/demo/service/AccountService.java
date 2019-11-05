@@ -50,22 +50,31 @@ public class AccountService {
 		}
 	}
 
-	public RespStat reguster(int id, String loginName, String password, String nickName, Integer age, String location) {
+	public RespStat reguster(String loginName, String password, String nickName, Integer age, String location) {
 		
 		Account account = new Account();
 //		account.setId(id);
-		account.setLocation(loginName);
+		account.setLoginName(loginName);
+		account.setPassword(password);
+		account.setLocation(location);
 		account.setNickName(nickName);
 		account.setAge(age);
-		account.setLocation(location);
-		int deleteByPrimaryKey = accMapper.insert(account);//影响结果的行数
-		System.out.println("reguster 影响结果行数 = "+deleteByPrimaryKey);
-		
-		if(deleteByPrimaryKey==1) {
-			return RespStat.build(200);
-		}else {
+		account.setRole("user");
+		try {
+			
+			int deleteByPrimaryKey = accMapper.insert(account);//影响结果的行数
+			System.out.println("reguster 影响结果行数 = "+deleteByPrimaryKey);
+			
+			if(deleteByPrimaryKey==1) {
+				return RespStat.build(200);
+			}else {
+				return RespStat.build(500,"添加出错");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
 			return RespStat.build(500,"添加出错");
 		}
+		
 	}
 	
 

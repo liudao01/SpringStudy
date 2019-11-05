@@ -139,8 +139,8 @@ input[type="submit"] {
 	<div class="pg_header">
 		<a class="logo">LOGO</a> <a class="pg_dl" id="i77">注册</a>
 	</div>
-	<form name="tijiao" method="post" onsubmit="return check()"
-		action="winford.top">
+	<div name="tijiao" 
+		>
 		<div class="left"></div>
 		<div class="pg_body">
 			<div class="menu">用户名:</div>
@@ -193,14 +193,14 @@ input[type="submit"] {
 			</div>
 		</div>
 		<div class="can">
-			<input id="i111" type="submit" name="002" value="注  册">
+			<input id="i111" type="button" name="002" value="注  册">
 			<p style="width: 200px; display: inline-block;"></p>
 			<input id="i222" type="button" name="004" value="取  消">
 			<p style="width: 200px; display: inline-block;"></p>
-			<input id="i223" type="button" name="004" value="随机生成">
+			<input id="i223" type="button" name="006" value="随机生成">
 
 		</div>
-	</form>
+	</div>
 	<script type="text/javascript">
             //刷新or取消
             document.getElementById('i111').onclick = function(){
@@ -218,13 +218,14 @@ input[type="submit"] {
 				var args = {loginName:loginName,password:password,age:age,nickName:nickName,location:location};
 				$.post(url,args,function(data){
 					
-					if(data == "success"){
+					if(data.code==200){
 						// 登录成功 跳转页面
-						//window.location.href="/index";
+						//window.location.href="/account/login";
 						console.log(data+"加载成功")
 					}else {
 						confirm("注册出错"+data);
-					}
+						//window.location.href="/account/register";
+					} 
 					
 					console.log(data)
 				}); 

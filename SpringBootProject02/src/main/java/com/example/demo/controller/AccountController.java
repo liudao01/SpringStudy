@@ -1,13 +1,19 @@
 package com.example.demo.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.Account;
 import com.example.demo.service.AccountService;
@@ -59,11 +65,11 @@ public class AccountController {
 	 */
 	@RequestMapping("/registerUser")
 	@ResponseBody
-	public RespStat registerUser(String loginName, String password, String nickName, Integer age,String location) {
-		
+	public RespStat registerUser(String loginName, String password, String nickName, Integer age, String location) {
+
 		System.out.println("注册用户 loginName " + loginName);
 		// 标记是否删除成功 status
-		RespStat respStat = accountService.reguster( loginName, password, nickName, age, location);
+		RespStat respStat = accountService.reguster(loginName, password, nickName, age, location);
 		return respStat;
 	}
 
@@ -138,16 +144,51 @@ public class AccountController {
 		return respStat;
 	}
 
-	private Integer id;
+	@RequestMapping("/profile")
+	public String profile() {
 
-	private String loginName;
+		try {
+			File path = new File(ResourceUtils.getURL("classpath:").getPath());
+			File upload = new File(path.getAbsolutePath(), "static/upload/");
+			System.out.println(upload.getAbsolutePath());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		;
+		return "account/profile";
+	}
 
-	private String password;
+	/**
+	 * 文件上传  这是在jar包解开的情况下才可以 如果打成jar包 不能在包里面写文件.
+	 * 
+	 * 应该做一次资源映射
+	 * 
+	 * @param filename
+	 * @param password
+	 * @return
+	 */
+	@RequestMapping("/fileUploadController")
+	public String fileUpload(MultipartFile filename, String password) {
+		System.out.println("password:" + password);
+		System.out.println("file:" + filename.getOriginalFilename());
+		try {
 
-	private String nickName;
+			File path = new File(ResourceUtils.getURL("classpath:").getPath());
+			File upload = new File(path.getAbsolutePath(), "static/upload/");
 
-	private Integer age;
+			System.out.println("upload:" + upload);
 
-	private String location;
+			filename.transferTo(new File(upload + "/" + filename.getOriginalFilename()));
+
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "profile";
+	}
 
 }

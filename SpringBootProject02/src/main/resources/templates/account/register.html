@@ -139,8 +139,7 @@ input[type="submit"] {
 	<div class="pg_header">
 		<a class="logo">LOGO</a> <a class="pg_dl" id="i77">注册</a>
 	</div>
-	<div name="tijiao" 
-		>
+	<div name="tijiao">
 		<div class="left"></div>
 		<div class="pg_body">
 			<div class="menu">用户名:</div>
@@ -151,13 +150,13 @@ input[type="submit"] {
 			</div>
 			<div class="menu">昵称:</div>
 			<div class="kong">
-				<input id="text5" type="text" name="02" onblur="check()">
-				<span id="div2" class="tian" style="margin-top: -25px">*(为必填)<span>
+				<input id="text5" type="text" name="02" onblur="check()"> <span
+					id="div2" class="tian" style="margin-top: -25px">*(为必填)<span>
 			</div>
 			<div class="menu">位置:</div>
 			<div class="kong">
-				<input id="text6" type="text" name="02" onblur="check()">
-				<span id="div2" class="tian" style="margin-top: -25px">*(为必填)<span>
+				<input id="text6" type="text" name="02" onblur="check()"> <span
+					id="div2" class="tian" style="margin-top: -25px">*(为必填)<span>
 			</div>
 			<div class="menu">密码:</div>
 			<div class="kong">
@@ -169,7 +168,7 @@ input[type="submit"] {
 				<input id="text3" type="password" name="01" onblur="check()">
 				<span id="div3" class="tian">*(为必填)<span>
 			</div>
-			
+
 			<div class="menu">年龄:</div>
 			<div class="kong">
 				<input id="text4" type="text" name="01" onblur="check()"> <span
@@ -221,6 +220,12 @@ input[type="submit"] {
 					if(data.code==200){
 						// 登录成功 跳转页面
 						//window.location.href="/account/login";
+					var	res=confirm("注册成功请登录"); //在页面上弹出对话框
+					if(res==true)
+						window.location.href="/account/login";
+						//alert("非常喜欢!");
+					else
+						//alert("不喜欢!");
 						console.log(data+"加载成功")
 					}else {
 						confirm("注册出错"+data);

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.Account;
+import com.example.demo.entity.Config;
 import com.example.demo.service.AccountService;
 import com.github.pagehelper.PageInfo;
 
@@ -31,6 +32,9 @@ public class AccountController {
 
 	@Autowired
 	AccountService accountService;
+	
+	@Autowired
+	Config config;
 
 	/**
 	 * 登录
@@ -38,7 +42,10 @@ public class AccountController {
 	 * @return
 	 */
 	@RequestMapping("login")
-	public String login() {
+	public String login(Model model) {
+		System.out.println("config");
+		
+		model.addAttribute("config",config);
 		return "account/login";
 	}
 

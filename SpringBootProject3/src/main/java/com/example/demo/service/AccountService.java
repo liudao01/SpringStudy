@@ -37,7 +37,7 @@ public class AccountService {
 		
 		System.out.println("alist.size = "+alist.size());
 		
-		System.out.println("alist = "+ToStringBuilder.reflectionToString(alist));
+		System.out.println("alist = "+ToStringBuilder.reflectionToString(alist.get(0)));
 		PageHelper.startPage(pageNum, pageSize);
 		AccountExample example = new AccountExample();
 		List<Account> list = accMapper.selectByExample(example);
@@ -46,22 +46,6 @@ public class AccountService {
 	}
 	
 
-	/**
-	 * 查找权限用户
-	 * @param pageNum
-	 * @param pageSize
-	 * @return
-	 */
-	public PageInfo<Account> findByPagePermisstion(int pageNum, int pageSize) {
-		
-		
-		
-		PageHelper.startPage(pageNum, pageSize);
-		AccountExample example = new AccountExample();
-		List<Account> list = accMapper.selectByExample(example);
-		PageInfo page= new PageInfo<>(list,5);//5显示导航最大有多少页码
-		return page; 
-	}
 
 
 	public RespStat deleteById(int id) {

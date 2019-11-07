@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * account
@@ -21,7 +22,31 @@ public class Account implements Serializable {
 
     private String role;
 
-    private static final long serialVersionUID = 1L;
+    //角色
+    private List<Role> roleList;
+    
+    //具体的权限
+    private List<Permission> permissionList;
+    
+    
+    
+    public List<Role> getRoleList() {
+		return roleList;
+	}
+
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
+	}
+
+	public List<Permission> getPermissionList() {
+		return permissionList;
+	}
+
+	public void setPermissionList(List<Permission> permissionList) {
+		this.permissionList = permissionList;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

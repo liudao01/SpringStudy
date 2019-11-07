@@ -11,30 +11,32 @@
  Target Server Version : 80016
  File Encoding         : utf-8
 
- Date: 11/07/2019 17:34:55 PM
+ Date: 11/07/2019 17:35:02 PM
 */
 
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
---  Table structure for `menu`
+--  Table structure for `permission`
 -- ----------------------------
-DROP TABLE IF EXISTS `menu`;
-CREATE TABLE `menu` (
+DROP TABLE IF EXISTS `permission`;
+CREATE TABLE `permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `roles` varchar(255) DEFAULT NULL,
-  `index` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  `c` tinyint(4) DEFAULT NULL,
+  `r` tinyint(4) DEFAULT NULL,
+  `u` tinyint(4) DEFAULT NULL,
+  `d` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `menu`
+--  Records of `permission`
 -- ----------------------------
 BEGIN;
-INSERT INTO `menu` VALUES ('8', '首页', 'all', '0'), ('9', '我的', 'all', '1'), ('10', '资料下载', 'all', '2');
+INSERT INTO `permission` VALUES ('1', 'ww.biadu', '111', null, null, null, null), ('2', 'manager', '2222', null, null, null, null), ('3', '333', '333', null, null, null, null);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

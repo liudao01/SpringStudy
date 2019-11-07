@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,12 +33,36 @@ public class AccountService {
 
 	public PageInfo<Account> findByPage(int pageNum, int pageSize) {
 		
+		List<Account> alist = accMapper.selectByPermission();
+		
+		System.out.println("alist.size = "+alist.size());
+		
+		System.out.println("alist = "+ToStringBuilder.reflectionToString(alist));
 		PageHelper.startPage(pageNum, pageSize);
 		AccountExample example = new AccountExample();
 		List<Account> list = accMapper.selectByExample(example);
 		PageInfo page= new PageInfo<>(list,5);//5显示导航最大有多少页码
 		return page; 
 	}
+	
+
+	/**
+	 * 查找权限用户
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
+	public PageInfo<Account> findByPagePermisstion(int pageNum, int pageSize) {
+		
+		
+		
+		PageHelper.startPage(pageNum, pageSize);
+		AccountExample example = new AccountExample();
+		List<Account> list = accMapper.selectByExample(example);
+		PageInfo page= new PageInfo<>(list,5);//5显示导航最大有多少页码
+		return page; 
+	}
+
 
 	public RespStat deleteById(int id) {
 		int deleteByPrimaryKey = accMapper.deleteByPrimaryKey(id);//影响结果的行数

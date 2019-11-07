@@ -11,30 +11,27 @@
  Target Server Version : 80016
  File Encoding         : utf-8
 
- Date: 11/07/2019 17:34:55 PM
+ Date: 11/07/2019 17:35:07 PM
 */
 
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
---  Table structure for `menu`
+--  Table structure for `role`
 -- ----------------------------
-DROP TABLE IF EXISTS `menu`;
-CREATE TABLE `menu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `roles` varchar(255) DEFAULT NULL,
-  `index` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `menu`
+--  Records of `role`
 -- ----------------------------
 BEGIN;
-INSERT INTO `menu` VALUES ('8', '首页', 'all', '0'), ('9', '我的', 'all', '1'), ('10', '资料下载', 'all', '2');
+INSERT INTO `role` VALUES ('1', '管理员'), ('2', '普通用户'), ('3', '游客');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

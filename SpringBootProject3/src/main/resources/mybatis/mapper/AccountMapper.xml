@@ -10,6 +10,20 @@
     <result column="location" jdbcType="VARCHAR" property="location" />
     <result column="role" jdbcType="VARCHAR" property="role" />
   </resultMap>
+  
+  <!-- 这是自定义的结果集 包含了一对多的关系 包含了两个集合 Account里面的两个list, id 是引用的时候用到的 -->
+  <resultMap type="com.example.demo.entity.Account" id="selectByPermissionResultMap">
+   
+  </resultMap>
+  
+  
+  
+  <!-- 自定义的查询 -->
+  <select id="selectByPermission" resultMap="selectByPermissionResultMap">
+  
+  
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

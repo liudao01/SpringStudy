@@ -11,30 +11,32 @@
  Target Server Version : 80016
  File Encoding         : utf-8
 
- Date: 11/07/2019 17:34:55 PM
+ Date: 11/07/2019 17:34:46 PM
 */
 
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
---  Table structure for `menu`
+--  Table structure for `account_role`
 -- ----------------------------
-DROP TABLE IF EXISTS `menu`;
-CREATE TABLE `menu` (
+DROP TABLE IF EXISTS `account_role`;
+CREATE TABLE `account_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `roles` varchar(255) DEFAULT NULL,
-  `index` varchar(255) DEFAULT NULL,
+  `account_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  KEY `role_id` (`role_id`),
+  KEY `account_id` (`account_id`),
+  CONSTRAINT `account_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`),
+  CONSTRAINT `role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `menu`
+--  Records of `account_role`
 -- ----------------------------
 BEGIN;
-INSERT INTO `menu` VALUES ('8', '首页', 'all', '0'), ('9', '我的', 'all', '1'), ('10', '资料下载', 'all', '2');
+INSERT INTO `account_role` VALUES ('1', '15', '1'), ('2', '15', '2');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

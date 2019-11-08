@@ -52,7 +52,7 @@ public class ManagerController {
 
 	@RequestMapping("permissionList")
 	public String permissionList(@RequestParam(defaultValue = "1") int pageNum,
-			@RequestParam(defaultValue = "5") int pageSize, Model model) {
+			@RequestParam(defaultValue = "10") int pageSize, Model model) {
 
 		PageInfo<Permission> page = peermissionService.findByPage(pageNum, pageSize);
 //		PageInfo<Account> page = accountService.findByPage(pageNum, pageSize);

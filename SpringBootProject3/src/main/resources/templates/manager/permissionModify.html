@@ -162,8 +162,12 @@
 			console.log("data" + data);
 			console.log("formObject" + formObject);
 			console.log("formObject" + JSON.stringify(formObject));
-
+			
+			console.log("formObject.id = " + formObject.id);
 			var url = "/api/v1/manager/permission/add";
+			if(formObject.id!=''){
+				url = "/api/v1/manager/permission/update";
+			}
 			
 			/* $.post(url,formObject,function(data){
 				console.log(data)

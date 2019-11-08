@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Account;
+import com.example.demo.entity.Permission;
+import com.example.demo.entity.Role;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.PermissionService;
 import com.example.demo.service.RoleService;
@@ -52,21 +54,29 @@ public class ManagerController {
 	public String permissionList(@RequestParam(defaultValue = "1") int pageNum,
 			@RequestParam(defaultValue = "5") int pageSize, Model model) {
 
-		//PageInfo<Account> page = peermissionService.findByPage(pageNum, pageSize);
-		PageInfo<Account> page = accountService.findByPage(pageNum, pageSize);
+		PageInfo<Permission> page = peermissionService.findByPage(pageNum, pageSize);
+//		PageInfo<Account> page = accountService.findByPage(pageNum, pageSize);
 
 		model.addAttribute("page", page);
 		return "manager/permissionList";
 	}
+	@RequestMapping("permissionModify")
+	public String permissionModify(@RequestParam int id, Model model) {
+
+		Permission permission = peermissionService.findByid(id);
+		model.addAttribute("permission", permission);
+		return "manager/permissionModify";
+	}
+
 
 	@RequestMapping("roleList")
 	public String roleList(@RequestParam(defaultValue = "1") int pageNum,
 			@RequestParam(defaultValue = "5") int pageSize, Model model) {
 
-		//PageInfo<Account> page = roleService.findByPage(pageNum, pageSize);
-		PageInfo<Account> page = accountService.findByPage(pageNum, pageSize);
+		PageInfo<Role> page = roleService.findByPage(pageNum, pageSize);
+//		PageInfo<Account> page = accountService.findByPage(pageNum, pageSize);
 		model.addAttribute("page", page);
-		return "manager/accountList";
+		return "manager/roleList";
 	}
 
 }

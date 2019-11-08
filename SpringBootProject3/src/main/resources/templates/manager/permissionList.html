@@ -15,138 +15,142 @@
 
 	<!--  导航栏                      开始  			 ↓ -->
 
-<!--  导航栏                      开始  			 ↓ -->
+	<!--  导航栏                      开始  			 ↓ -->
 
-<nav class="navbar navbar-default">
-
-
-
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/index">首页</a>
-    </div>
+	<nav class="navbar navbar-default">
 
 
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    
-    
-    
-      <ul class="nav navbar-nav">
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          人力资源 <span class="caret"></span>
-          </a>
-        
-          <ul class="dropdown-menu">
-            <li><a href="/account/list">员工列表</a></li>
-            
-          </ul>
-          
-          
-        </li>
-      </ul>
-      
-       <ul class="nav navbar-nav">
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          系统设置 <span class="caret"></span>
-          </a>
-        
-          <ul class="dropdown-menu">
-            <li><a href="/manager/accountList">账号列表</a></li>
-            <li><a href="/manager/roleList"> 角色管理</a></li>
-            <li><a href="/manager/permissionList">权限管理</a></li>
-          </ul>
-          
-        </li>
-      </ul>
-      
-      
-     	
-      	
-      	
-      
-      
-      
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="请输入员工姓名或工号">
-        </div>
-        <button type="submit" class="btn btn-default">搜索</button>
-      </form>
-      
-      
-      
-     
-     <!--  未登录用户 -->
-      <ul th:if="${session.account} ==null" class="nav navbar-nav navbar-right">
-        <li><a href="/account/register">注册</a></li>
-        <li><a href="/account/login">登录</a></li>
-      </ul>
-      
-     
-       <!-- 已登录用户    ↓ --> 
-      <ul th:if="${session.account} !=null" class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          
-          欢迎你 : [[${session.account.loginName}]] <span class="caret"></span> </a>
-          <ul class="dropdown-menu">
-            <li><a href="/account/profile">个人信息</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="/account/logOut">退出登录</a></li>
-          </ul>
-        </li>
-      </ul>
-      
-       <!-- 已登录用户   ↑ --> 
-    </div><!-- /.navbar-collapse -->
-    
-    
-    
-  </div><!-- /.container-fluid -->
-</nav>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/index">首页</a>
+			</div>
+
+
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+
+
+
+				<ul class="nav navbar-nav">
+
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"> 人力资源 <span class="caret"></span>
+					</a>
+
+						<ul class="dropdown-menu">
+							<li><a href="/account/list">员工列表</a></li>
+
+						</ul></li>
+				</ul>
+
+				<ul class="nav navbar-nav">
+
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"> 系统设置 <span class="caret"></span>
+					</a>
+
+						<ul class="dropdown-menu">
+							<li><a href="/manager/accountList">账号列表</a></li>
+							<li><a href="/manager/roleList"> 角色管理</a></li>
+							<li><a href="/manager/permissionList">权限管理</a></li>
+						</ul></li>
+				</ul>
+
+
+
+
+
+
+
+
+				<form class="navbar-form navbar-left">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="请输入员工姓名或工号">
+					</div>
+					<button type="submit" class="btn btn-default">搜索</button>
+				</form>
+
+
+
+
+				<!--  未登录用户 -->
+				<ul th:if="${session.account} ==null"
+					class="nav navbar-nav navbar-right">
+					<li><a href="/account/register">注册</a></li>
+					<li><a href="/account/login">登录</a></li>
+				</ul>
+
+
+				<!-- 已登录用户    ↓ -->
+				<ul th:if="${session.account} !=null"
+					class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"> 欢迎你 : [[${session.account.loginName}]]
+							<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="/account/profile">个人信息</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/account/logOut">退出登录</a></li>
+						</ul></li>
+				</ul>
+
+				<!-- 已登录用户   ↑ -->
+			</div>
+			<!-- /.navbar-collapse -->
+
+
+
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
 
 
 	<!--  导航栏                      结束  			↑       -->
-<h1>权限管理</h1>
+	<h1>权限管理</h1>
+	<a class="ben btn-default">添加权限</a>
 	<!--  列表       开始   ↓ -->
 	<table class="table table-hover">
 		<tr>
 			<th>序号</th>
-			<th>工号</th>
-			<th>loginName</th>
-			<th>nickName</th>
-			<th>age</th>
-			<th>location</th>
-			<th>role</th>
+			<th>id</th>
+			<th>c</th>
+			<th>r</th>
+			<th>u</th>
+			<th>d</th>
+			<th>url</th>
+			<th>name</th>
 			<th>操作</th>
 		</tr>
 
-		<tr th:each="account : ${page.list}">
-			<td th:text="${accountStat.count}"></td>
-			<td th:text="${account.id}">工号</td>
-			<td th:text="${account.loginName}">loginName</td>
-			<td th:text="${account.nickName}">nickName</td>
-			<td th:text="${account.age}">age</td>
-			<td th:text="${account.location}">location</td>
-			<td th:text="${account.role}">role</td>
+		<tr th:each="item : ${page.list}">
+			<td th:text="${itemStat.count}"></td>
+			<td th:text="${item.id}">工号</td>
+			<td th:text="${item.name}">name</td>
+			<td th:text="${item.c}">c</td>
+			<td th:text="${item.r}">r</td>
+			<td th:text="${item.u}">u</td>
+			<td th:text="${item.d}">d</td>
+			<td th:text="${item.url}">url</td>
 			<td><a class="btn btn-danger"
-				th:href="@{'javascript:deleteById('+${account.id}+');'}"> 删除 </a>
-
-				修改密码</td>
+				th:href="@{'javascript:deleteById('+${item.id}+');'}"> 删除 </a> </td>
+			<td><a class="btn btn-danger"
+				th:href="@{'javascript:modify('+${item.id}+');'}"> 修改 </a> </td>
 
 
 		</tr>
@@ -185,6 +189,7 @@
 				<div class="modal-body small">
 					<p>[Message]</p>
 				</div>
+				
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary ok"
 						data-dismiss="modal">[BtnOk]</button>
@@ -196,6 +201,11 @@
 	</div>
 	<!-- JavaScript -->
 	<script type="text/javascript">
+	
+		function modify(id){
+			window.location.href = "/manager/permissionModify?id="+id;
+		}
+	
 		$(function() {
 			window.Modal = function() {
 				var reg = new RegExp("\\[([^\\[\\]]*?)\\]", 'igm');
@@ -341,7 +351,7 @@
 			showMsg("haha", function() {
 			}); */
 			showConfirm("是否删除用户", function(data) {
-				
+
 				console.log("删除");
 				//删除操作 1 以链接方式访问controlleer 里面的方法  可能造成页面跳转
 				// 异步通过ajax 去访问 带有json访问结果的controller
@@ -359,15 +369,15 @@
 						alert(data.msg);
 					}
 				});
-				
-			});
-/* 			var isDel = confirm("是否确定删除用户");
 
-			if (isDel == false) {
-				
-			} */
-			return;
+			});
+			/* 			var isDel = confirm("是否确定删除用户");
+
+			 if (isDel == false) {
 			
+			 } */
+			return;
+
 		}
 	</script>
 

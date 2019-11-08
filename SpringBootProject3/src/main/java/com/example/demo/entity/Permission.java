@@ -13,14 +13,13 @@ public class Permission implements Serializable {
 
     private String name;
 
-    private Byte c;
+    private Boolean c;
 
-    private Byte r;
+    private Boolean r;
 
-    private Byte u;
+    private Boolean u;
 
-    private Byte d;
-
+    private Boolean d;
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -47,74 +46,41 @@ public class Permission implements Serializable {
         this.name = name;
     }
 
-    public Byte getC() {
-        return c;
-    }
+   
 
-    public void setC(Byte c) {
-        this.c = c;
-    }
+    public Boolean getC() {
+		return c;
+	}
 
-    public Byte getR() {
-        return r;
-    }
+	public void setC(Boolean c) {
+		this.c = c;
+	}
 
-    public void setR(Byte r) {
-        this.r = r;
-    }
+	public Boolean getR() {
+		return r;
+	}
 
-    public Byte getU() {
-        return u;
-    }
+	public void setR(Boolean r) {
+		this.r = r;
+	}
 
-    public void setU(Byte u) {
-        this.u = u;
-    }
+	public Boolean getU() {
+		return u;
+	}
 
-    public Byte getD() {
-        return d;
-    }
+	public void setU(Boolean u) {
+		this.u = u;
+	}
 
-    public void setD(Byte d) {
-        this.d = d;
-    }
+	public Boolean getD() {
+		return d;
+	}
 
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        Permission other = (Permission) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getC() == null ? other.getC() == null : this.getC().equals(other.getC()))
-            && (this.getR() == null ? other.getR() == null : this.getR().equals(other.getR()))
-            && (this.getU() == null ? other.getU() == null : this.getU().equals(other.getU()))
-            && (this.getD() == null ? other.getD() == null : this.getD().equals(other.getD()));
-    }
+	public void setD(Boolean d) {
+		this.d = d;
+	}
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getC() == null) ? 0 : getC().hashCode());
-        result = prime * result + ((getR() == null) ? 0 : getR().hashCode());
-        result = prime * result + ((getU() == null) ? 0 : getU().hashCode());
-        result = prime * result + ((getD() == null) ? 0 : getD().hashCode());
-        return result;
-    }
-
-    @Override
+	@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());

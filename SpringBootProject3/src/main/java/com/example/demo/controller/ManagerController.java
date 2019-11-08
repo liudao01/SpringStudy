@@ -67,6 +67,14 @@ public class ManagerController {
 		model.addAttribute("permission", permission);
 		return "manager/permissionModify";
 	}
+	// /manager/permissionAdd  权限添加
+	@RequestMapping("permissionAdd")
+	public String permissionAdd( Model model) {
+
+//		Permission permission = peermissionService.findByid(id);
+//		model.addAttribute("permission", permission);
+		return "manager/permissionModify";
+	}
 
 
 	@RequestMapping("roleList")

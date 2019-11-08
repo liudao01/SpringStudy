@@ -44,10 +44,16 @@ public class PermissionService {
 	 */
 	public void update(Permission permission) {
 		PermissionExample example = new PermissionExample();
-		// TODO Auto-generated method stub
 //		pMapper.updateByExample(permission, example );  有外键 不能使用byExample
 //		pMapper.updateByPrimaryKey(permission);
-		pMapper.updateByPrimaryKeySelective(permission);
+		pMapper.updateByPrimaryKeySelective(permission);//Selective 是存在的时候才更新
+	}
+
+
+	public void add(Permission permission) {
+		// TODO Auto-generated method stub
+		PermissionExample example = new PermissionExample();
+		pMapper.insert(permission);
 	}
 
 }

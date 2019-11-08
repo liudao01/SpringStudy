@@ -127,15 +127,15 @@
 	<form id = "p">
 	
 	<!-- [[${permission}]] -->
-	权限名称 <input name="name" type="text" th:value="${permission.name}"><br>
-	url<input name="url" type="text" th:value="${permission.url}"><br>
+	权限名称 <input name="name" type="text" th:value="${permission}==null?'':${permission.name}"><br>
+	url<input name="url" type="text" th:value="${permission}==null?'':${permission.url}"><br>
 	权限  
 	<input type="checkbox" id="c"> c
 	<input type="checkbox" id="r"> r
 	<input type="checkbox" id="u"> u
 	<input type="checkbox" id="d"> d
 	
-	<input type="text" name="id" th:value="${p}==null?'':${p.id}">
+	<input type="text" name="id" th:value="${permission}==null?'':${permission.id}">
 	
 	<br>
 <a class="btn btn-danger" href="javascript:smt();">提交</a>

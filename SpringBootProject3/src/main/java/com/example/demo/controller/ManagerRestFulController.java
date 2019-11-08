@@ -25,9 +25,14 @@ public class ManagerRestFulController {
 	@RequestMapping("/add")
 	public RespStat add(@RequestBody Permission permission) {
 		System.out.println("permission = "+permission);
+		permissSrv.add(permission);
+		return RespStat.build(200);
+	}
+	@RequestMapping("/update")
+	public RespStat update(@RequestBody Permission permission) {
+		System.out.println("permission = "+permission);
 		permissSrv.update(permission);
 		return RespStat.build(200);
 	}
-	
 
 }

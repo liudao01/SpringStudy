@@ -9,6 +9,8 @@ import java.io.Serializable;
 public class Permission implements Serializable {
     private Integer id;
 
+    private String url;
+
     private String name;
 
     private Byte c;
@@ -27,6 +29,14 @@ public class Permission implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getName() {
@@ -82,6 +92,7 @@ public class Permission implements Serializable {
         }
         Permission other = (Permission) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getC() == null ? other.getC() == null : this.getC().equals(other.getC()))
             && (this.getR() == null ? other.getR() == null : this.getR().equals(other.getR()))
@@ -94,6 +105,7 @@ public class Permission implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getC() == null) ? 0 : getC().hashCode());
         result = prime * result + ((getR() == null) ? 0 : getR().hashCode());
@@ -109,6 +121,7 @@ public class Permission implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", url=").append(url);
         sb.append(", name=").append(name);
         sb.append(", c=").append(c);
         sb.append(", r=").append(r);

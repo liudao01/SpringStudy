@@ -37,6 +37,17 @@
 			<id column="rid" jdbcType="INTEGER" property="id" />
 			<result column="rname" jdbcType="VARCHAR" property="name" />
 		</collection>
+
+		<collection property="permissionList"
+			ofType="com.example.demo.entity.Permission">
+			<id column="pid" jdbcType="INTEGER" property="id" />
+			<result column="url" jdbcType="VARCHAR" property="url" />
+			<result column="pname" jdbcType="VARCHAR" property="name" />
+			<result column="c" jdbcType="TINYINT" property="c" />
+			<result column="r" jdbcType="TINYINT" property="r" />
+			<result column="u" jdbcType="TINYINT" property="u" />
+			<result column="d" jdbcType="TINYINT" property="d" />
+		</collection>
 	</resultMap>
 
 
@@ -44,25 +55,37 @@
 	<!-- 自定义的查询 -->
 	<select id="selectByPermission"
 		resultMap="selectByPermissionResultMap">
-		<!-- select * FROM account as a
+		<!-- select * FROM account as a INNER JOIN account_role as ar on a.id = 
+			ar.account_id INNER join role as r on r.id = ar.role_id -->
+		<!-- select a.id as aid, a.login_name, a.password, a.location, r.id as 
+			rid, r.name as rname FROM account as a INNER JOIN account_role as ar on a.id 
+			= ar.account_id INNER join role as r on r.id = ar.role_id -->
+		select
+		a.id as aid,
+		a.login_name,
+		a.password,
+		a.location,
+
+		r.id as rid,
+		r.name as rname,
+
+		p.id as pid,
+		p.url,
+		p.c,
+		p.r,
+		p.u,
+		p.d,
+		p.name as pname
+		FROM account as a
 		INNER JOIN account_role as ar
 		on a.id = ar.account_id
 		INNER join role as r
-		on r.id = ar.role_id -->
-select 
-	a.id as aid,
-	a.login_name,
-	a.password,
-	a.location,
-
-	r.id as rid,
-	r.name as rname
-
-	FROM account as a 
-	INNER JOIN account_role as ar
-		on a.id = ar.account_id
-	INNER join role as r
 		on r.id = ar.role_id
+
+		left join role_permission as rp
+		on r.id = rp.role_id_p
+		left join permission as p
+		on p.id = rp.permission_id_p
 	</select>
 
 	<sql id="Example_Where_Clause">

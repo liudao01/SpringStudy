@@ -1,8 +1,8 @@
 package com.example.demo.mapper;
 
-import com.example.demo.entity.Permission;
-
 import org.springframework.stereotype.Repository;
+
+import com.example.demo.entity.Permission;
 
 /**
  * PermissionMapper继承基类

@@ -1,8 +1,8 @@
 package com.example.demo.mapper;
 
-import com.example.demo.entity.Role;
-
 import org.springframework.stereotype.Repository;
+
+import com.example.demo.entity.Role;
 
 /**
  * RoleMapper继承基类

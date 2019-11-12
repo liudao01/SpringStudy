@@ -172,24 +172,30 @@ public class AccountController {
 	 */
 	@RequestMapping("/fileUploadController")
 	@ResponseBody
-	public String fileUpload(MultipartFile filename, String password) {
+	public String fileUpload(MultipartFile filename, String password,HttpServletRequest httpServletRequest) {
 		System.out.println("password:" + password);
 		System.out.println("file:" + filename.getOriginalFilename());
-		try {
+		Account account = (Account)httpServletRequest.getSession().getAttribute("account");
 
+		try {
+//			accountService.update
 			//原始的位置  映射的   ResourceUtils.getURL("classpath:").getPath()
 			System.out.println("ResourceUtils.getURL(\"classpath:\").getPath() = "
 					+ ResourceUtils.getURL("classpath:").getPath());
 			///Users/liumaolin/Downloads/project_study
 			//暂时写死 本地的路径  需要加上 static/upload/ 
-			File upload = new File(("/Users/liumaolin/Downloads/project_study"));
 //			File path = new File(ResourceUtils.getURL("classpath:").getPath());
 //			File upload = new File(path.getAbsolutePath(), "static/upload/");
 
-			System.out.println("upload:" + upload);
 			System.out.println("filename.getOriginalFilename() = "+filename.getOriginalFilename());
 
-			filename.transferTo(new File(upload + "/" + filename.getOriginalFilename()));
+			filename.transferTo(new File("/Users/liumaolin/Downloads/project_study" + "/" + filename.getOriginalFilename()));
+
+			account.setLocation(filename.getOriginalFilename());//设置头像
+			account.setPassword(password);//密码
+
+			accountService.update(account);
+
 			System.out.println("ok");
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block

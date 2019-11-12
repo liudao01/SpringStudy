@@ -60,7 +60,6 @@ public class AccountController {
 	/**
 	 * 注册用户
 	 * 
-	 * @param id
 	 * @param loginName
 	 * @param password
 	 * @param nickName
@@ -122,7 +121,6 @@ public class AccountController {
 	/**
 	 * 用户列表
 	 * 
-	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/list")
@@ -138,7 +136,6 @@ public class AccountController {
 	/**
 	 * 根据id 删除用户 TODO 需要校验是否当前登录用户 如果是当前登录用户 不能删除
 	 * 
-	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/deleteById")
@@ -185,8 +182,9 @@ public class AccountController {
 					+ ResourceUtils.getURL("classpath:").getPath());
 			///Users/liumaolin/Downloads/project_study
 			//暂时写死 本地的路径  需要加上 static/upload/ 
-			File path = new File("/Users/liumaolin/Downloads/project_study");
-			File upload = new File(path.getAbsolutePath(), "static/upload/");
+			File upload = new File(("/Users/liumaolin/Downloads/project_study"));
+//			File path = new File(ResourceUtils.getURL("classpath:").getPath());
+//			File upload = new File(path.getAbsolutePath(), "static/upload/");
 
 			System.out.println("upload:" + upload);
 			System.out.println("filename.getOriginalFilename() = "+filename.getOriginalFilename());

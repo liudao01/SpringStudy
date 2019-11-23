@@ -16,75 +16,76 @@ import com.github.pagehelper.PageInfo;
 
 /**
  * 用户账号相关操作
- * 
- * @author liumaolin
  *
+ * @author liumaolin
  */
 @Controller
 @RequestMapping("/manager")
 public class ManagerController {
 
-	@Autowired
-	AccountService accountService;
+    @Autowired
+    AccountService accountService;
 
-	@Autowired
-	PermissionService peermissionService;
-	
-	@Autowired
-	RoleService roleService;
-	
-	
-	/**
-	 * 账号列表
-	 * 
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("accountList")
-	public String accountList(@RequestParam(defaultValue = "1") int pageNum,
-			@RequestParam(defaultValue = "5") int pageSize, Model model) {
+    @Autowired
+    PermissionService peermissionService;
 
-		PageInfo<Account> page = accountService.findByPage(pageNum, pageSize);
+    @Autowired
+    RoleService roleService;
 
-		model.addAttribute("page", page);
-		return "manager/accountList";
-	}
 
-	@RequestMapping("permissionList")
-	public String permissionList(@RequestParam(defaultValue = "1") int pageNum,
-			@RequestParam(defaultValue = "10") int pageSize, Model model) {
+    /**
+     * 账号列表
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("accountList")
+    public String accountList(@RequestParam(defaultValue = "1") int pageNum,
+                              @RequestParam(defaultValue = "5") int pageSize, Model model) {
 
-		PageInfo<Permission> page = peermissionService.findByPage(pageNum, pageSize);
+        PageInfo<Account> page = accountService.findByPage(pageNum, pageSize);
+
+        model.addAttribute("page", page);
+        return "manager/accountList";
+    }
+
+    @RequestMapping("permissionList")
+    public String permissionList(@RequestParam(defaultValue = "1") int pageNum,
+                                 @RequestParam(defaultValue = "10") int pageSize, Model model) {
+
+        PageInfo<Permission> page = peermissionService.findByPage(pageNum, pageSize);
 //		PageInfo<Account> page = accountService.findByPage(pageNum, pageSize);
 
-		model.addAttribute("page", page);
-		return "manager/permissionList";
-	}
-	@RequestMapping("permissionModify")
-	public String permissionModify(@RequestParam int id, Model model) {
+        model.addAttribute("page", page);
+        return "manager/permissionList";
+    }
 
-		Permission permission = peermissionService.findByid(id);
-		model.addAttribute("permission", permission);
-		return "manager/permissionModify";
-	}
-	// /manager/permissionAdd  权限添加
-	@RequestMapping("permissionAdd")
-	public String permissionAdd( Model model) {
+    @RequestMapping("permissionModify")
+    public String permissionModify(@RequestParam int id, Model model) {
+
+        Permission permission = peermissionService.findByid(id);
+        model.addAttribute("permission", permission);
+        return "manager/permissionModify";
+    }
+
+    // /manager/permissionAdd  权限添加
+    @RequestMapping("permissionAdd")
+    public String permissionAdd(Model model) {
 
 //		Permission permission = peermissionService.findByid(id);
 //		model.addAttribute("permission", permission);
-		return "manager/permissionModify";
-	}
+        return "manager/permissionModify";
+    }
 
 
-	@RequestMapping("roleList")
-	public String roleList(@RequestParam(defaultValue = "1") int pageNum,
-			@RequestParam(defaultValue = "5") int pageSize, Model model) {
+    @RequestMapping("roleList")
+    public String roleList(@RequestParam(defaultValue = "1") int pageNum,
+                           @RequestParam(defaultValue = "5") int pageSize, Model model) {
 
-		PageInfo<Role> page = roleService.findByPage(pageNum, pageSize);
+        PageInfo<Role> page = roleService.findByPage(pageNum, pageSize);
 //		PageInfo<Account> page = accountService.findByPage(pageNum, pageSize);
-		model.addAttribute("page", page);
-		return "manager/roleList";
-	}
+        model.addAttribute("page", page);
+        return "manager/roleList";
+    }
 
 }

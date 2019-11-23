@@ -127,8 +127,13 @@
         <td th:text="${itemStat.count}"></td>
         <td th:text="${item.id}">工号</td>
         <td th:text="${item.name}">name</td>
-        <td><a class="btn btn-danger"
-               th:href="@{'javascript:permissionModify('+${item.id}+')'}"> 权限 </a>
+        <td>
+
+            <a class="btn btn-danger" th:href="@{'javascript:permissionModify('+${item.id}+');'}">
+                权限
+            </a>
+
+        </td>
     </tr>
 
 </table>
@@ -182,7 +187,7 @@
 <script type="text/javascript">
 
     function permissionModify(id) {
-        window.location.href = "/manager/rolePermission?id=" + id;
+        window.location.href = "/manager/rolePermission/" + id;
     }
 
     $(function () {

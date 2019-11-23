@@ -1,16 +1,28 @@
 package com.example.demo.service;
 
+import com.example.demo.mapper.RoleExample;
+import com.example.demo.mapper.RoleMapper;
+import com.github.pagehelper.PageHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Role;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 @Service
 public class RoleService {
 
+	@Autowired
+	RoleMapper roleMapper;
 	public PageInfo<Role> findByPage(int pageNum, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+//		System.out.println("roleMapper findByPage");
+		PageHelper.startPage(pageNum,pageSize);
+		RoleExample roleExample = new RoleExample();
+		List<Role> roles = roleMapper.selectByExample(roleExample);
+		return new PageInfo<>(roles);
 	}
+
 
 }

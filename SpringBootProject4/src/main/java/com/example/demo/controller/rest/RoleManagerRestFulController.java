@@ -24,13 +24,10 @@ public class RoleManagerRestFulController {
 
     @RequestMapping("/add")
     public RespStat add(@RequestParam int[] permissions, @RequestParam int id) {
-        System.out.println("permission = " + ToStringBuilder.reflectionToString(permissions));
-//        if (permission.getId() == null) {
-//
-//            roleService.add(permission);
-//        } else {
-//			permissSrv.update(permission);
-//        }
+        System.out.println("/manager/role/Permission = " + ToStringBuilder.reflectionToString(permissions));
+        //sql 语句
+        //INSERT INTO role_permission (role_id_p,permission_id_p) VALUES ();
+        roleService.addPermission(id, permissions);
         return RespStat.build(200);
     }
 

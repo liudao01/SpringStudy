@@ -92,10 +92,9 @@ public class ManagerController {
 
     @RequestMapping("rolePermission/{id}")
     public String rolePermission(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
-        System.out.println("id = " + "@PathVariable int id,"+id);
-//        PageInfo<Role> page = roleService.findByPage(pageNum, pageSize);
-//		PageInfo<Account> page = accountService.findByPage(pageNum, pageSize);
-//        model.addAttribute("page", page);
+        System.out.println("id = " + "@PathVariable int id," + id);
+        Role role = roleService.findById(id);
+        model.addAttribute("role", role);
         return "manager/rolePermission";
     }
 

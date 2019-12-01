@@ -25,4 +25,9 @@ public class RoleService {
 	}
 
 
+	public Role findById(Integer id) {
+		RoleExample roleExample = new RoleExample();
+		Role role = roleMapper.selectByPrimaryKey(id);
+		return role;
+	}
 }

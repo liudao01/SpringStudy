@@ -114,12 +114,12 @@
 
 
 <!--  导航栏                      结束  			↑       -->
-<h1>角色权限管理</h1>
+<h1>角色的权限管理</h1>
 
 <form id="p">
 
     <!-- [[${permission}]] -->
-    权限名称 <input name="name" type="text" th:value="${permission}==null?'':${permission.name}"><br>
+    角色名称  <input name="name" type="text" th:value="${role}==null?'':${role.name}"><br>
     url<input name="url" type="text" th:value="${permission}==null?'':${permission.url}"><br>
     权限
     <input type="checkbox" id="c" th:checked="${permission==null?'':permission.c}"> c

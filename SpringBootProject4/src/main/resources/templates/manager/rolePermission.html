@@ -119,16 +119,12 @@
 <form id="p">
 
     <!-- [[${permission}]] -->
-    角色名称  <input name="name" type="text" th:value="${role}==null?'':${role.name}"><br>
-    url<input name="url" type="text" th:value="${permission}==null?'':${permission.url}"><br>
+    角色名称 <input name="name" type="text" th:value="${role}==null?'':${role.name}"><br>
+    url<input name="url" type="text" th:value="${p}==null?'':${p.url}"><br>
     权限
-    <input type="checkbox" id="c" th:checked="${permission==null?'':permission.c}"> c
-    <input type="checkbox" id="r" th:checked="${permission==null?'':permission.r}"> r
-    <input type="checkbox" id="u" th:checked="${permission==null?'':permission.u}"> u
-    <input type="checkbox" id="d" th:checked="${permission==null?'':permission.d}"> d
-
-    <input type="text" name="id" th:value="${permission}==null?'':${permission.id}">
-
+    <span th:each="p : ${pList}">
+            <input type="checkbox">[[${p.name}]]
+        </span>
     <br>
     <a class="btn btn-danger" href="javascript:smt();">提交</a>
 
@@ -143,10 +139,6 @@
         $.each(data, function (i, item) {
             formObject[item.name] = item.value
         });
-        formObject["c"] = $("#c").is(':checked');
-        formObject["r"] = $("#r").is(':checked');
-        formObject["u"] = $("#u").is(':checked');
-        formObject["d"] = $("#d").is(':checked');
 
 
         // 提交json对象 到controller

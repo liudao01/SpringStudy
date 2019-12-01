@@ -1,15 +1,14 @@
 package com.example.demo.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.example.demo.entity.Permission;
 import com.example.demo.mapper.PermissionExample;
 import com.example.demo.mapper.PermissionMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PermissionService {
@@ -56,4 +55,7 @@ public class PermissionService {
 		pMapper.insert(permission);
 	}
 
+	public List<Permission> findAll() {
+		return pMapper.selectByExample(new PermissionExample());
+	}
 }

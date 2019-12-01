@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 用户账号相关操作
@@ -94,6 +95,10 @@ public class ManagerController {
     public String rolePermission(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
         System.out.println("id = " + "@PathVariable int id," + id);
         Role role = roleService.findById(id);
+        //找到所有的权限 让他去选择
+        List<Permission> pList = peermissionService.findAll();
+
+        model.addAttribute("pList", pList);
         model.addAttribute("role", role);
         return "manager/rolePermission";
     }

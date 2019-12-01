@@ -1,5 +1,6 @@
-package com.example.demo.controller;
+package com.example.demo.controller.rest;
 
+import com.example.demo.controller.RespStat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ import com.example.demo.service.PermissionService;
  */
 @RestController
 @RequestMapping("api/v1/manager/permission")
-public class ManagerRestFulController {
+public class PermissionManagerRestFulController {
 
 
     @Autowired

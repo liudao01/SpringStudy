@@ -11,5 +11,7 @@ public interface RoleMapper extends MyBatisBaseDao<Role, Integer, RoleExample> {
     //    void addPermission(int id, int[] permissions);
     void addPermissions(int id, int[] permissions);
 
+    Role findById(Integer id);
+
 //    void addPermission(int id, int permission);
 }

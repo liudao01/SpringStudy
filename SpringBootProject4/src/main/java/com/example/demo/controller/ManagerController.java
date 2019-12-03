@@ -7,6 +7,7 @@ import com.example.demo.service.AccountService;
 import com.example.demo.service.PermissionService;
 import com.example.demo.service.RoleService;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,10 +92,19 @@ public class ManagerController {
         return "manager/roleList";
     }
 
+    /**
+     * 角色添加/ 修改权限
+     *
+     * @param id
+     * @param model
+     * @param request
+     * @return
+     */
     @RequestMapping("rolePermission/{id}")
     public String rolePermission(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
         System.out.println("id = " + "@PathVariable int id," + id);
         Role role = roleService.findById(id);
+        System.out.println("role 关联查询 permission = "+ToStringBuilder.reflectionToString(role));
         //找到所有的权限 让他去选择
         List<Permission> pList = peermissionService.findAll();
 

@@ -5,7 +5,36 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
     </resultMap>
+    <resultMap id="RoleResultMap" type="com.example.demo.entity.Role">
+        <id column="rid" jdbcType="INTEGER" property="id"/>
+        <result column="rname" jdbcType="VARCHAR" property="name"/>
+        <collection property="permissions" ofType="com.example.demo.entity.Permission">
+            <id column="pid" jdbcType="INTEGER" property="id"/>
+            <result column="url" jdbcType="VARCHAR" property="url"/>
+            <result column="pname" jdbcType="VARCHAR" property="name"/>
+            <result column="c" jdbcType="TINYINT" property="c"/>
+            <result column="r" jdbcType="TINYINT" property="r"/>
+            <result column="u" jdbcType="TINYINT" property="u"/>
+            <result column="d" jdbcType="TINYINT" property="d"/>
+        </collection>
+    </resultMap>
 
+    <select id="findById" resultType="com.example.demo.entity.Role" resultMap="RoleResultMap">
+        SELECT
+r.id as rid,
+r.name as rname,
+p.id as pid,
+p.name as pnme,
+p.url ,
+p.c ,
+p.r ,
+p.u ,
+p.d
+	from role r
+	INNER JOIN role_permission rp on r.id = rp.role_id_p
+	INNER JOIN permission p on p.id = rp.permission_id_p
+	where r.id = #{id}
+    </select>
     <!--  <insert id="addPermission">-->
     <!--    delete from role_permission where role_id_p = #{id};-->
     <!--    INSERT INTO role_permission (role_id_p,permission_id_p) VALUES (#{id},#{permission});-->
@@ -17,7 +46,7 @@
 
         <foreach collection="permissions" item="p" separator=",">
             (
-                #{id},#{p}
+            #{id},#{p}
             )
         </foreach>
 

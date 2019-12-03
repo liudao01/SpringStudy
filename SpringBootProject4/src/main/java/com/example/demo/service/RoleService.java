@@ -26,9 +26,9 @@ public class RoleService {
 
 
     public Role findById(Integer id) {
-        RoleExample roleExample = new RoleExample();
-        Role role = roleMapper.selectByPrimaryKey(id);
-        return role;
+//        RoleExample roleExample = new RoleExample();
+//        Role role = roleMapper.selectByPrimaryKey(id);
+        return roleMapper.findById(id);
     }
 
     public void addPermission(int id, int[] permissions) {

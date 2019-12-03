@@ -1,15 +1,27 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * role
- * @author 
+ * role 角色bean
+ *
+ * @author
  */
 public class Role implements Serializable {
     private Integer id;
 
     private String name;
+
+    private List<Permission> permissions;
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -42,7 +54,7 @@ public class Role implements Serializable {
         }
         Role other = (Role) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()));
     }
 
     @Override

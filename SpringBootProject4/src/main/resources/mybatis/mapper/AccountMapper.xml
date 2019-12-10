@@ -1,209 +1,237 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.AccountMapper">
-	<resultMap id="BaseResultMap"
-		type="com.example.demo.entity.Account">
-		<id column="id" jdbcType="INTEGER" property="id" />
-		<result column="login_name" jdbcType="VARCHAR"
-			property="loginName" />
-		<result column="password" jdbcType="VARCHAR"
-			property="password" />
-		<result column="nick_name" jdbcType="VARCHAR"
-			property="nickName" />
-		<result column="age" jdbcType="INTEGER" property="age" />
-		<result column="location" jdbcType="VARCHAR"
-			property="location" />
-		<result column="role" jdbcType="VARCHAR" property="role" />
-	</resultMap>
+    <resultMap id="BaseResultMap"
+               type="com.example.demo.entity.Account">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="login_name" jdbcType="VARCHAR"
+                property="loginName"/>
+        <result column="password" jdbcType="VARCHAR"
+                property="password"/>
+        <result column="nick_name" jdbcType="VARCHAR"
+                property="nickName"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="location" jdbcType="VARCHAR"
+                property="location"/>
+        <result column="role" jdbcType="VARCHAR" property="role"/>
+    </resultMap>
 
-	<!-- 这是自定义的结果集 包含了一对多的关系 包含了两个集合roleList permissionList. Account里面的两个list, 
-		id 是引用的时候用到的 -->
-	<resultMap type="com.example.demo.entity.Account"
-		id="selectByPermissionResultMap">
-		<id column="aid" jdbcType="INTEGER" property="id" />
-		<result column="login_name" jdbcType="VARCHAR"
-			property="loginName" />
-		<result column="password" jdbcType="VARCHAR"
-			property="password" />
-		<result column="nick_name" jdbcType="VARCHAR"
-			property="nickName" />
-		<result column="age" jdbcType="INTEGER" property="age" />
-		<result column="location" jdbcType="VARCHAR"
-			property="location" />
-		<result column="role" jdbcType="VARCHAR" property="role" />
-		<!-- ofType的类型是roleList 装的实体类 -->
-		<collection property="roleList"
-			ofType="com.example.demo.entity.Role">
-			<id column="rid" jdbcType="INTEGER" property="id" />
-			<result column="rname" jdbcType="VARCHAR" property="name" />
-		</collection>
+    <!-- 这是自定义的结果集 包含了一对多的关系 包含了两个集合roleList permissionList. Account里面的两个list,
+        id 是引用的时候用到的 -->
+    <resultMap type="com.example.demo.entity.Account" id="selectByPermissionResultMap">
+        <id column="aid" jdbcType="INTEGER" property="id"/>
+        <result column="login_name" jdbcType="VARCHAR"
+                property="loginName"/>
+        <result column="password" jdbcType="VARCHAR"
+                property="password"/>
+        <result column="nick_name" jdbcType="VARCHAR"
+                property="nickName"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="location" jdbcType="VARCHAR"
+                property="location"/>
+        <result column="role" jdbcType="VARCHAR" property="role"/>
+        <!-- ofType的类型是roleList 装的实体类 -->
+        <collection property="roleList"
+                    ofType="com.example.demo.entity.Role">
+            <id column="rid" jdbcType="INTEGER" property="id"/>
+            <result column="rname" jdbcType="VARCHAR" property="name"/>
+        </collection>
 
-		<collection property="permissionList"
-			ofType="com.example.demo.entity.Permission">
-			<id column="pid" jdbcType="INTEGER" property="id" />
-			<result column="url" jdbcType="VARCHAR" property="url" />
-			<result column="pname" jdbcType="VARCHAR" property="name" />
-			<result column="c" jdbcType="TINYINT" property="c" />
-			<result column="r" jdbcType="TINYINT" property="r" />
-			<result column="u" jdbcType="TINYINT" property="u" />
-			<result column="d" jdbcType="TINYINT" property="d" />
-		</collection>
-	</resultMap>
-
+        <collection property="permissionList"
+                    ofType="com.example.demo.entity.Permission">
+            <id column="pid" jdbcType="INTEGER" property="id"/>
+            <result column="url" jdbcType="VARCHAR" property="url"/>
+            <result column="pname" jdbcType="VARCHAR" property="name"/>
+            <result column="c" jdbcType="TINYINT" property="c"/>
+            <result column="r" jdbcType="TINYINT" property="r"/>
+            <result column="u" jdbcType="TINYINT" property="u"/>
+            <result column="d" jdbcType="TINYINT" property="d"/>
+        </collection>
+    </resultMap>
 
 
-	<!-- 自定义的查询 -->
-	<select id="selectByPermission"
-		resultMap="selectByPermissionResultMap">
-		<!-- select * FROM account as a INNER JOIN account_role as ar on a.id = 
-			ar.account_id INNER join role as r on r.id = ar.role_id -->
-		<!-- select a.id as aid, a.login_name, a.password, a.location, r.id as 
-			rid, r.name as rname FROM account as a INNER JOIN account_role as ar on a.id 
-			= ar.account_id INNER join role as r on r.id = ar.role_id -->
+    <select id="findByLoginAndPassword" resultType="com.example.demo.entity.Account" resultMap="selectByPermissionResultMap">
 		select
-		a.id as aid,
-		a.login_name,
-		a.password,
-		a.location,
+        a.id as aid,
+        a.login_name,
+        a.password,
+        a.location,
 
-		r.id as rid,
-		r.name as rname,
+        r.id as rid,
+        r.name as rname,
 
-		p.id as pid,
-		p.url,
-		p.c,
-		p.r,
-		p.u,
-		p.d,
-		p.name as pname
-		FROM account as a
-		INNER JOIN account_role as ar
-		on a.id = ar.account_id
-		INNER join role as r
-		on r.id = ar.role_id
+        p.id as pid,
+        p.url,
+        p.c,
+        p.r,
+        p.u,
+        p.d,
+        p.name as pname
+        FROM account as a
+        INNER JOIN account_role as ar
+        on a.id = ar.account_id
+        INNER join role as r
+        on r.id = ar.role_id
 
-		left join role_permission as rp
-		on r.id = rp.role_id_p
-		left join permission as p
-		on p.id = rp.permission_id_p
-	</select>
+        left join role_permission as rp
+        on r.id = rp.role_id_p
+        left join permission as p
+        on p.id = rp.permission_id_p
+		where a.login_name = ${loginName} and a.password = ${password}
 
-	<sql id="Example_Where_Clause">
-		<where>
-			<foreach collection="oredCriteria" item="criteria"
-				separator="or">
-				<if test="criteria.valid">
-					<trim prefix="(" prefixOverrides="and" suffix=")">
-						<foreach collection="criteria.criteria" item="criterion">
-							<choose>
-								<when test="criterion.noValue">
-									and ${criterion.condition}
-								</when>
-								<when test="criterion.singleValue">
-									and ${criterion.condition} #{criterion.value}
-								</when>
-								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value}
-									and
-									#{criterion.secondValue}
-								</when>
-								<when test="criterion.listValue">
-									and ${criterion.condition}
-									<foreach close=")" collection="criterion.value"
-										item="listItem" open="(" separator=",">
-										#{listItem}
-									</foreach>
-								</when>
-							</choose>
-						</foreach>
-					</trim>
-				</if>
-			</foreach>
-		</where>
-	</sql>
-	<sql id="Update_By_Example_Where_Clause">
-		<where>
-			<foreach collection="example.oredCriteria" item="criteria"
-				separator="or">
-				<if test="criteria.valid">
-					<trim prefix="(" prefixOverrides="and" suffix=")">
-						<foreach collection="criteria.criteria" item="criterion">
-							<choose>
-								<when test="criterion.noValue">
-									and ${criterion.condition}
-								</when>
-								<when test="criterion.singleValue">
-									and ${criterion.condition} #{criterion.value}
-								</when>
-								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value}
-									and
-									#{criterion.secondValue}
-								</when>
-								<when test="criterion.listValue">
-									and ${criterion.condition}
-									<foreach close=")" collection="criterion.value"
-										item="listItem" open="(" separator=",">
-										#{listItem}
-									</foreach>
-								</when>
-							</choose>
-						</foreach>
-					</trim>
-				</if>
-			</foreach>
-		</where>
-	</sql>
-	<sql id="Base_Column_List">
+    </select>
+    <!-- 自定义的查询 -->
+    <select id="selectByPermission"
+            resultMap="selectByPermissionResultMap">
+        <!-- select * FROM account as a INNER JOIN account_role as ar on a.id =
+            ar.account_id INNER join role as r on r.id = ar.role_id -->
+        <!-- select a.id as aid, a.login_name, a.password, a.location, r.id as
+            rid, r.name as rname FROM account as a INNER JOIN account_role as ar on a.id
+            = ar.account_id INNER join role as r on r.id = ar.role_id -->
+        select
+        a.id as aid,
+        a.login_name,
+        a.password,
+        a.location,
+
+        r.id as rid,
+        r.name as rname,
+
+        p.id as pid,
+        p.url,
+        p.c,
+        p.r,
+        p.u,
+        p.d,
+        p.name as pname
+        FROM account as a
+        INNER JOIN account_role as ar
+        on a.id = ar.account_id
+        INNER join role as r
+        on r.id = ar.role_id
+
+        left join role_permission as rp
+        on r.id = rp.role_id_p
+        left join permission as p
+        on p.id = rp.permission_id_p
+    </select>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria"
+                     separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                    and
+                                    #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value"
+                                             item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria"
+                     separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                    and
+                                    #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value"
+                                             item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
 		id, login_name, `password`, nick_name, age, `location`,
 		`role`
 	</sql>
-	<select id="selectByExample"
-		parameterType="com.example.demo.mapper.AccountExample"
-		resultMap="BaseResultMap">
-		select
-		<if test="distinct">
-			distinct
-		</if>
-		<include refid="Base_Column_List" />
-		from account
-		<if test="_parameter != null">
-			<include refid="Example_Where_Clause" />
-		</if>
-		<if test="orderByClause != null">
-			order by ${orderByClause}
-		</if>
-		<if test="limit != null">
-			<if test="offset != null">
-				limit ${offset}, ${limit}
-			</if>
-			<if test="offset == null">
-				limit ${limit}
-			</if>
-		</if>
-	</select>
-	<select id="selectByPrimaryKey"
-		parameterType="java.lang.Integer" resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		from account
-		where id = #{id,jdbcType=INTEGER}
-	</select>
-	<delete id="deleteByPrimaryKey"
-		parameterType="java.lang.Integer">
+    <select id="selectByExample"
+            parameterType="com.example.demo.mapper.AccountExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from account
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limit != null">
+            <if test="offset != null">
+                limit ${offset}, ${limit}
+            </if>
+            <if test="offset == null">
+                limit ${limit}
+            </if>
+        </if>
+    </select>
+    <select id="selectByPrimaryKey"
+            parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from account
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey"
+            parameterType="java.lang.Integer">
 		delete from account
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
-	<delete id="deleteByExample"
-		parameterType="com.example.demo.mapper.AccountExample">
-		delete from account
-		<if test="_parameter != null">
-			<include refid="Example_Where_Clause" />
-		</if>
-	</delete>
-	<insert id="insert" keyColumn="id" keyProperty="id"
-		parameterType="com.example.demo.entity.Account"
-		useGeneratedKeys="true">
+    <delete id="deleteByExample"
+            parameterType="com.example.demo.mapper.AccountExample">
+        delete from account
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.example.demo.entity.Account"
+            useGeneratedKeys="true">
 		insert into account (login_name, `password`,
 		nick_name,
 		age, `location`, `role`
@@ -215,134 +243,135 @@
 		#{location,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}
 		)
 	</insert>
-	<insert id="insertSelective" keyColumn="id" keyProperty="id"
-		parameterType="com.example.demo.entity.Account"
-		useGeneratedKeys="true">
-		insert into account
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="loginName != null">
-				login_name,
-			</if>
-			<if test="password != null">
-				`password`,
-			</if>
-			<if test="nickName != null">
-				nick_name,
-			</if>
-			<if test="age != null">
-				age,
-			</if>
-			<if test="location != null">
-				`location`,
-			</if>
-			<if test="role != null">
-				`role`,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="loginName != null">
-				#{loginName,jdbcType=VARCHAR},
-			</if>
-			<if test="password != null">
-				#{password,jdbcType=VARCHAR},
-			</if>
-			<if test="nickName != null">
-				#{nickName,jdbcType=VARCHAR},
-			</if>
-			<if test="age != null">
-				#{age,jdbcType=INTEGER},
-			</if>
-			<if test="location != null">
-				#{location,jdbcType=VARCHAR},
-			</if>
-			<if test="role != null">
-				#{role,jdbcType=VARCHAR},
-			</if>
-		</trim>
-	</insert>
-	<select id="countByExample"
-		parameterType="com.example.demo.mapper.AccountExample"
-		resultType="java.lang.Long">
-		select count(*) from account
-		<if test="_parameter != null">
-			<include refid="Example_Where_Clause" />
-		</if>
-	</select>
-	<update id="updateByExampleSelective" parameterType="map">
-		update account
-		<set>
-			<if test="record.id != null">
-				id = #{record.id,jdbcType=INTEGER},
-			</if>
-			<if test="record.loginName != null">
-				login_name = #{record.loginName,jdbcType=VARCHAR},
-			</if>
-			<if test="record.password != null">
-				`password` = #{record.password,jdbcType=VARCHAR},
-			</if>
-			<if test="record.nickName != null">
-				nick_name = #{record.nickName,jdbcType=VARCHAR},
-			</if>
-			<if test="record.age != null">
-				age = #{record.age,jdbcType=INTEGER},
-			</if>
-			<if test="record.location != null">
-				`location` = #{record.location,jdbcType=VARCHAR},
-			</if>
-			<if test="record.role != null">
-				`role` = #{record.role,jdbcType=VARCHAR},
-			</if>
-		</set>
-		<if test="_parameter != null">
-			<include refid="Update_By_Example_Where_Clause" />
-		</if>
-	</update>
-	<update id="updateByExample" parameterType="map">
-		update account
-		set id = #{record.id,jdbcType=INTEGER},
-		login_name =
-		#{record.loginName,jdbcType=VARCHAR},
-		`password` =
-		#{record.password,jdbcType=VARCHAR},
-		nick_name =
-		#{record.nickName,jdbcType=VARCHAR},
-		age =
-		#{record.age,jdbcType=INTEGER},
-		`location` =
-		#{record.location,jdbcType=VARCHAR},
-		`role` =
-		#{record.role,jdbcType=VARCHAR}
-		<if test="_parameter != null">
-			<include refid="Update_By_Example_Where_Clause" />
-		</if>
-	</update>
-	<update id="updateByPrimaryKeySelective"
-		parameterType="com.example.demo.entity.Account">
-		update account
-		<set>
-			<if test="loginName != null">
-				login_name = #{loginName,jdbcType=VARCHAR},
-			</if>
-			<if test="password != null">
-				`password` = #{password,jdbcType=VARCHAR},
-			</if>
-			<if test="nickName != null">
-				nick_name = #{nickName,jdbcType=VARCHAR},
-			</if>
-			<if test="age != null">
-				age = #{age,jdbcType=INTEGER},
-			</if>
-			<if test="location != null">
-				`location` = #{location,jdbcType=VARCHAR},
-			</if>
-			<if test="role != null">
-				`role` = #{role,jdbcType=VARCHAR},
-			</if>
-		</set>
-		where id = #{id,jdbcType=INTEGER}
-	</update>
-	<update id="updateByPrimaryKey"
-		parameterType="com.example.demo.entity.Account">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.example.demo.entity.Account"
+            useGeneratedKeys="true">
+        insert into account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="loginName != null">
+                login_name,
+            </if>
+            <if test="password != null">
+                `password`,
+            </if>
+            <if test="nickName != null">
+                nick_name,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="location != null">
+                `location`,
+            </if>
+            <if test="role != null">
+                `role`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="location != null">
+                #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="role != null">
+                #{role,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample"
+            parameterType="com.example.demo.mapper.AccountExample"
+            resultType="java.lang.Long">
+        select count(*) from account
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map">
+        update account
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.loginName != null">
+                login_name = #{record.loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null">
+                `password` = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nickName != null">
+                nick_name = #{record.nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.age != null">
+                age = #{record.age,jdbcType=INTEGER},
+            </if>
+            <if test="record.location != null">
+                `location` = #{record.location,jdbcType=VARCHAR},
+            </if>
+            <if test="record.role != null">
+                `role` = #{record.role,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update account
+        set id = #{record.id,jdbcType=INTEGER},
+        login_name =
+        #{record.loginName,jdbcType=VARCHAR},
+        `password` =
+        #{record.password,jdbcType=VARCHAR},
+        nick_name =
+        #{record.nickName,jdbcType=VARCHAR},
+        age =
+        #{record.age,jdbcType=INTEGER},
+        `location` =
+        #{record.location,jdbcType=VARCHAR},
+        `role` =
+        #{record.role,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.example.demo.entity.Account">
+        update account
+        <set>
+            <if test="loginName != null">
+                login_name = #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                `password` = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="location != null">
+                `location` = #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="role != null">
+                `role` = #{role,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey"
+            parameterType="com.example.demo.entity.Account">
 		update account
 		set login_name =
 		#{loginName,jdbcType=VARCHAR},

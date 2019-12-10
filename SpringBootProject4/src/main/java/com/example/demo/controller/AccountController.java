@@ -1,11 +1,10 @@
 package com.example.demo.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.example.demo.entity.Account;
+import com.example.demo.entity.Config;
+import com.example.demo.service.AccountService;
+import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.entity.Account;
-import com.example.demo.entity.Config;
-import com.example.demo.service.AccountService;
-import com.github.pagehelper.PageInfo;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * 用户账号相关操作
@@ -90,12 +89,13 @@ public class AccountController {
         System.out.print("password=" + password);
         // 1 直接返回是否登录成功的结果
         // 2. 返回Account 对象 若对象是空的 在controller 里做业务逻辑处理
-
         Account account = accountService.findByLoginAndPassword(loginName, password);
 
         if (account == null) {
             return "登录失败";
         } else {
+
+            System.out.println("validataAccount ======登录用户: " + ToStringBuilder.reflectionToString(account));
             // 登录成功
             // 让service 返回对象 如果登录成功把用户对象 写到session里
             // 在不同controller 或者前端页面上都能使用当前Account对象
@@ -175,9 +175,9 @@ public class AccountController {
     public String fileUpload(MultipartFile filename, String password, HttpServletRequest httpServletRequest) {
         System.out.println("password:" + password);
         System.out.println("file:" + filename.getOriginalFilename());
-        Account account = (Account)httpServletRequest.getSession().getAttribute("account");
+        Account account = (Account) httpServletRequest.getSession().getAttribute("account");
 
-		String path = "d:/testUpLoad";
+        String path = "d:/testUpLoad";
 //		String path = "/Users/liumaolin/Downloads/project_study";
         try {
 //            File path = new File(ResourceUtils.getURL("classpath:").getPath());
@@ -185,7 +185,7 @@ public class AccountController {
 //			accountService.update
             //原始的位置  映射的   ResourceUtils.getURL("classpath:").getPath()
             System.out.println("ResourceUtils.getURL(\"classpath:\").getPath() = "
-                + ResourceUtils.getURL("classpath:").getPath());
+                    + ResourceUtils.getURL("classpath:").getPath());
             ///Users/liumaolin/Downloads/project_study
             //暂时写死 本地的路径  需要加上 static/upload/
 //			File path = new File(ResourceUtils.getURL("classpath:").getPath());

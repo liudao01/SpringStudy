@@ -1,17 +1,16 @@
 package com.example.demo.service;
 
-import java.util.List;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.example.demo.controller.RespStat;
 import com.example.demo.entity.Account;
 import com.example.demo.mapper.AccountExample;
 import com.example.demo.mapper.AccountMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -27,8 +26,10 @@ public class AccountService {
 		// 1.没有
 		// 2. 有一条
 		// 3. 好几条
-		List<Account> list = accMapper.selectByExample(example);
-		return list.size() == 0 ? null : list.get(0);
+//		List<Account> list = accMapper.selectByExample(example);
+		Account account = accMapper.findByLoginAndPassword(loginName, password);
+		return account;
+//		return list.size() == 0 ? null : list.get(0);
 	}
 
 	public PageInfo<Account> findByPage(int pageNum, int pageSize) {

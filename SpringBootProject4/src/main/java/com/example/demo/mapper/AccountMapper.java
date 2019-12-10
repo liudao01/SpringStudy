@@ -1,10 +1,9 @@
 package com.example.demo.mapper;
 
-import java.util.List;
-
+import com.example.demo.entity.Account;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.entity.Account;
+import java.util.List;
 
 /**
  * AccountMapper继承基类
@@ -13,4 +12,7 @@ import com.example.demo.entity.Account;
 public interface AccountMapper extends MyBatisBaseDao<Account, Integer, AccountExample> {
 
 	List<Account> selectByPermission();
+
+
+	Account findByLoginAndPassword(String loginName, String password);
 }

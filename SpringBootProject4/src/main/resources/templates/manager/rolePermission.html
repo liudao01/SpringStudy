@@ -16,7 +16,6 @@
 
 <!--  导航栏                      开始  			 ↓ -->
 
-<!--  导航栏                      开始  			 ↓ -->
 
 <nav class="navbar navbar-default">
 
@@ -121,19 +120,56 @@
     <!-- [[${permission}]] -->
     角色名称 <input disabled="disabled" name="name" type="text" th:value="${role}==null?'':${role.name}"><br>
 
-    角色id <input type="text" name="id" th:value="${role.id}"><br>
+    角色id <input type="text" name="id" th:value="${role}==null?'':${role.id}"><br>
 
-<!--    th:checked="${permission==null?'':permission.c}-->
+
+    <!--    th:checked="${permission==null?'':permission.c}-->
     角色权限
     <span th:each="p : ${pList}">
-            <input name="permissions" type="checkbox"  th:value="${p.id}" th:id="${p.id}" >[[${p.name}]]
+            <input name="permissions" type="checkbox" th:value="${p.id}" th:id="${p.id}">
+        <label>[[${p.name}]]</label>
         </span>
     <br>
+
+    <input type="checkbox">
+    <label>Checkbox 1</label>
+
+    <input type="checkbox" checked>
+    <label>Checkbox 2</label>
+
+    <input type="radio" name="iCheck">
+    <label>Radio button 1</label>
+
+    <input type="radio" name="iCheck" checked>
+    <label>Radio button 2</label>
+
     <a class="btn btn-danger" href="javascript:smt();">提交</a>
 
 
 </form>
+已有权限
+<span th:each="p : ${role.permissions}">
+            <input name="permissions" type="checkbox" th:value="${p.id}" th:id="${p.id}">
+        <label>[[${p.name}]]</label>
+        </span>
+<br>
 <!-- JavaScript -->
+<script>
+    $(document).ready(function(){
+        $('input').each(function(){
+            var self = $(this),
+                label = self.next(),
+                label_text = label.text();
+
+            label.remove();
+            self.iCheck({
+                checkboxClass: 'icheckbox_line',
+                radioClass: 'iradio_line',
+                insert: '<div class="icheck_line-icon"></div>' + label_text
+            });
+        });
+    });
+</script>
 <script type="text/javascript">
     function smt() {
         var formObject = {};
@@ -157,10 +193,10 @@
         // 	url = "/api/v1/manager/permission/update";
         // }
 
-         $.post(url,data,function(data){
-             if(data !='1'){
-                 alert(data.message)
-             }
+        $.post(url, data, function (data) {
+            if (data != '1') {
+                alert(data.message)
+            }
             console.log(data)
             // Content type 'application/x-www-form-urlencoded;charset=UTF-8' not supported] 会有这个问题
         })

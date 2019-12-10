@@ -104,7 +104,9 @@ public class ManagerController {
     public String rolePermission(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
         System.out.println("id = " + "@PathVariable int id," + id);
         Role role = roleService.findById(id);
-        System.out.println("role 关联查询 permission = "+ToStringBuilder.reflectionToString(role));
+        if (role != null) {
+            System.out.println("role 关联查询 permission = " + ToStringBuilder.reflectionToString(role));
+        }
         //找到所有的权限 让他去选择
         List<Permission> pList = peermissionService.findAll();
 

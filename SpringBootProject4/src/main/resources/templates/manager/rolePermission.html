@@ -8,9 +8,12 @@
     <!-- 最新的 Bootstrap 核心 css 文件 -->
     <!-- 在url上 使用 @标签 可以帮我们 自动加上 contextpath -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/skins/all.css}">
+    <link rel="stylesheet" th:href="@{/css/line/red.css}">
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script th:src="@{/js/common/jquery-3.4.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/icheck.min.js}"></script>
 </head>
 <body>
 
@@ -126,10 +129,11 @@
     <!--    th:checked="${permission==null?'':permission.c}-->
     角色权限
     <span th:each="p : ${pList}">
+         <br>
             <input name="permissions" type="checkbox" th:value="${p.id}" th:id="${p.id}">
         <label>[[${p.name}]]</label>
-        </span>
-    <br>
+
+    </span>
 
     <input type="checkbox">
     <label>Checkbox 1</label>
@@ -150,7 +154,7 @@
 已有权限
 <span th:each="p : ${role.permissions}">
             <input name="permissions" type="checkbox" th:value="${p.id}" th:id="${p.id}">
-        <label>[[${p.name}]]</label>
+        <label>[[${p}]]</label>
         </span>
 <br>
 <!-- JavaScript -->
@@ -163,8 +167,8 @@
 
             label.remove();
             self.iCheck({
-                checkboxClass: 'icheckbox_line',
-                radioClass: 'iradio_line',
+                checkboxClass: 'icheckbox_line-red',
+                radioClass: 'iradio_line-red',
                 insert: '<div class="icheck_line-icon"></div>' + label_text
             });
         });

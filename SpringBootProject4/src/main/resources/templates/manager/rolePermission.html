@@ -125,42 +125,29 @@
 
     角色id <input type="text" name="id" th:value="${role}==null?'':${role.id}"><br>
 
-
     <!--    th:checked="${permission==null?'':permission.c}-->
+    <!--   循环遍历角色权限 -->
     角色权限
-    <span th:each="p : ${pList}">
-         <br>
-            <input name="permissions" type="checkbox" th:value="${p.id}" th:id="${p.id}">
-        <label>[[${p.name}]]</label>
 
+    <span th:each="p : ${pList}">
+        <div style="width: 400px">
+    <input name="permissions" type="checkbox" th:value="${p.id}" th:id="${p.id}">     <label>[[${p.name}]]</label>
+    </div>
     </span>
 
-    <input type="checkbox">
-    <label>Checkbox 1</label>
-
-    <input type="checkbox" checked>
-    <label>Checkbox 2</label>
-
-    <input type="radio" name="iCheck">
-    <label>Radio button 1</label>
-
-    <input type="radio" name="iCheck" checked>
-    <label>Radio button 2</label>
 
     <a class="btn btn-danger" href="javascript:smt();">提交</a>
 
 
 </form>
-已有权限
-<span th:each="p : ${role.permissions}">
-            <input name="permissions" type="checkbox" th:value="${p.id}" th:id="${p.id}">
-        <label>[[${p}]]</label>
-        </span>
-<br>
+<!--已有权限-->
+<!--<span th:each="p : ${role.permissions}">-->
+<!--        <label>[[${p}]]</label>-->
+<!--        </span>-->
 <!-- JavaScript -->
 <script>
-    $(document).ready(function(){
-        $('input').each(function(){
+    $(document).ready(function () {
+        $('input').each(function () {
             var self = $(this),
                 label = self.next(),
                 label_text = label.text();

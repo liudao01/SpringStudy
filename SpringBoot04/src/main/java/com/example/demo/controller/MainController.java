@@ -13,8 +13,8 @@ import com.example.demo.service.CityService;
 
 /**
  * 在我们访问 http://主机名：端口号/context-path/Controller的URI/方法的URI
- * http://localhost:80/boot/user/list
- * 
+ * http://localhost:8089/boot/user/list
+ * http://localhost:8089/boot/list
  * @author Administrator
  * @Controller 加入Spring容器管理,单例
  */
